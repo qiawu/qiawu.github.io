@@ -5,19 +5,18 @@
   
 
   
-  <title>新西兰之旅 | 沉默的愤青</title>
+  <title>PRML阅读笔记1 | 沉默的愤青</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。 Auckland第一天我们坐飞机来到了奥克兰 ChrisChurch">
-<meta name="keywords" content="游记">
+  <meta name="description" content="最近刚刚看完Ng的machine learning，想再加一点料，于是拿起PRML，开始啃。。。 第一章： Polynomial Curve Fitting:  regression, error function, RMS(root-mean-square),overfitting  Probability Theory:  many distribution….. frequentist: t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新西兰之旅">
-<meta property="og:url" content="http://yoursite.com/2017/12/28/NewZealand/index.html">
+<meta property="og:title" content="PRML阅读笔记1">
+<meta property="og:url" content="http://yoursite.com/2014/01/27/PRML1/index.html">
 <meta property="og:site_name" content="沉默的愤青">
-<meta property="og:description" content="刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。 Auckland第一天我们坐飞机来到了奥克兰 ChrisChurch">
-<meta property="og:updated_time" content="2018-02-28T15:22:56.000Z">
+<meta property="og:description" content="最近刚刚看完Ng的machine learning，想再加一点料，于是拿起PRML，开始啃。。。 第一章： Polynomial Curve Fitting:  regression, error function, RMS(root-mean-square),overfitting  Probability Theory:  many distribution….. frequentist: t">
+<meta property="og:updated_time" content="2018-03-01T13:11:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新西兰之旅">
-<meta name="twitter:description" content="刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。 Auckland第一天我们坐飞机来到了奥克兰 ChrisChurch">
+<meta name="twitter:title" content="PRML阅读笔记1">
+<meta name="twitter:description" content="最近刚刚看完Ng的machine learning，想再加一点料，于是拿起PRML，开始啃。。。 第一章： Polynomial Curve Fitting:  regression, error function, RMS(root-mean-square),overfitting  Probability Theory:  many distribution….. frequentist: t">
   
     <link rel="alternate" href="/atom.xml" title="沉默的愤青" type="application/atom+xml">
   
@@ -64,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-NewZealand" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-PRML1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/28/NewZealand/" class="article-date">
-  <time datetime="2017-12-28T15:14:16.000Z" itemprop="datePublished">2017-12-28</time>
+    <a href="/2014/01/27/PRML1/" class="article-date">
+  <time datetime="2014-01-27T13:09:34.000Z" itemprop="datePublished">2014-01-27</time>
 </a>
     
   </div>
@@ -78,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      新西兰之旅
+      PRML阅读笔记1
     </h1>
   
 
@@ -86,28 +85,56 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。</p>
-<h2 id="Auckland"><a href="#Auckland" class="headerlink" title="Auckland"></a>Auckland</h2><p>第一天我们坐飞机来到了奥克兰</p>
-<h2 id="ChrisChurch"><a href="#ChrisChurch" class="headerlink" title="ChrisChurch"></a>ChrisChurch</h2>
+        <p>最近刚刚看完Ng的machine learning，想再加一点料，于是拿起PRML，开始啃。。。</p>
+<p>第一章：</p>
+<p>Polynomial Curve Fitting:</p>
+<ul>
+<li>regression, error function, RMS(root-mean-square),overfitting</li>
+</ul>
+<p>Probability Theory:</p>
+<ul>
+<li>many distribution…..</li>
+<li>frequentist: think parameter exist, we just need to find it</li>
+<li>Bayesian: think paremter is random variable, we need to take its distribution into account</li>
+<li>frequentist and Bayesian diff in prior of parameter</li>
+<li>curve fitting(probability aspect): model P(x|w) –&gt; error function, model P(w|x) by Bayesian –&gt; RMS</li>
+<li>Bayesian curve fitting: integrate all w</li>
+</ul>
+<p>Model selection:(pass)</p>
+<p>Curse of Dimensionality:(pass)</p>
+<p>Decision Theory:</p>
+<ul>
+<li>Minimize misclassification rate, minimize expected loss, reject option(set threshold)</li>
+<li>three type:generative model(model p(x|y)), discriminative model, no probability</li>
+</ul>
+<p>Information Theory:(pass)</p>
+<p>import views:</p>
+<p>1. frequentist and Bayesian</p>
+<p>2. regulation</p>
+<p>3. regression on probability view and non-probability view</p>
+<p>4. generative model, discriminative model, no probability</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/28/NewZealand/" data-id="cje8j75lm0003wupjwz78snus" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2014/01/27/PRML1/" data-id="cje8j75l10000wupjia85vmnj" class="article-share-link">Teilen</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/游记/">游记</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-  
-    <a href="/2014/02/03/PRML3/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">PRML阅读笔记3</div>
+    <a href="/2014/01/29/PRML2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          PRML阅读笔记2
+        
+      </div>
     </a>
+  
   
 </nav>
 
