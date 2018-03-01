@@ -5,19 +5,21 @@
   
 
   
-  <title>想读的书单 | 沉默的愤青</title>
+  <title>Java Collection 源码阅读1 | 沉默的愤青</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术：The Phoenix projectAgile software development principle patterns and practiceContinuous deliveryMicrosoft application architecture guideExtreme programming 非技术：明朝那些事联想风云百年孤独">
-<meta name="keywords" content="杂谈">
+  <meta name="description" content="How fast-fail happened in non-synced collections(why modCount is not volatile: http://www.jianshu.com/p/d9ee4b075d5a ) Differences between Iterator and ListIterator Methods of Iterator (for list and s">
+<meta name="keywords" content="技术,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="想读的书单">
-<meta property="og:url" content="http://yoursite.com/2018/02/01/books/index.html">
+<meta property="og:title" content="Java Collection 源码阅读1">
+<meta property="og:url" content="http://yoursite.com/2017/06/01/collections/index.html">
 <meta property="og:site_name" content="沉默的愤青">
-<meta property="og:description" content="技术：The Phoenix projectAgile software development principle patterns and practiceContinuous deliveryMicrosoft application architecture guideExtreme programming 非技术：明朝那些事联想风云百年孤独">
-<meta property="og:updated_time" content="2018-03-01T13:32:25.000Z">
+<meta property="og:description" content="How fast-fail happened in non-synced collections(why modCount is not volatile: http://www.jianshu.com/p/d9ee4b075d5a ) Differences between Iterator and ListIterator Methods of Iterator (for list and s">
+<meta property="og:image" content="http://yoursite.com/images/collection.png">
+<meta property="og:updated_time" content="2018-03-01T14:50:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="想读的书单">
-<meta name="twitter:description" content="技术：The Phoenix projectAgile software development principle patterns and practiceContinuous deliveryMicrosoft application architecture guideExtreme programming 非技术：明朝那些事联想风云百年孤独">
+<meta name="twitter:title" content="Java Collection 源码阅读1">
+<meta name="twitter:description" content="How fast-fail happened in non-synced collections(why modCount is not volatile: http://www.jianshu.com/p/d9ee4b075d5a ) Differences between Iterator and ListIterator Methods of Iterator (for list and s">
+<meta name="twitter:image" content="http://yoursite.com/images/collection.png">
   
     <link rel="alternate" href="/atom.xml" title="沉默的愤青" type="application/atom+xml">
   
@@ -64,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-books" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-collections" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/02/01/books/" class="article-date">
-  <time datetime="2018-02-01T13:26:09.000Z" itemprop="datePublished">2018-02-01</time>
+    <a href="/2017/06/01/collections/" class="article-date">
+  <time datetime="2017-06-01T12:48:48.000Z" itemprop="datePublished">2017-06-01</time>
 </a>
     
   </div>
@@ -78,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      想读的书单
+      Java Collection 源码阅读1
     </h1>
   
 
@@ -86,16 +88,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>技术：<br>The Phoenix project<br>Agile software development principle patterns and practice<br>Continuous delivery<br>Microsoft application architecture guide<br>Extreme programming</p>
-<p>非技术：<br>明朝那些事<br>联想风云<br>百年孤独</p>
+        <h2 id="How-fast-fail-happened-in-non-synced-collections"><a href="#How-fast-fail-happened-in-non-synced-collections" class="headerlink" title="How fast-fail happened in non-synced collections"></a>How fast-fail happened in non-synced collections</h2><p>(why modCount is not volatile: <a href="http://www.jianshu.com/p/d9ee4b075d5a" target="_blank" rel="noopener">http://www.jianshu.com/p/d9ee4b075d5a</a> )</p>
+<h2 id="Differences-between-Iterator-and-ListIterator"><a href="#Differences-between-Iterator-and-ListIterator" class="headerlink" title="Differences between Iterator and ListIterator"></a>Differences between Iterator and ListIterator</h2><ul>
+<li><p>Methods of Iterator (for list and set):</p>
+<ul>
+<li><p>hasNext()</p>
+</li>
+<li><p>next()</p>
+</li>
+<li><p>remove()</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Methods of ListIterator (only for list):</p>
+<ul>
+<li><p>add(E e)</p>
+</li>
+<li><p>hasNext()</p>
+</li>
+<li><p>hasPrevious()</p>
+</li>
+<li><p>next()</p>
+</li>
+<li><p>nextIndex()</p>
+</li>
+<li><p>previous()</p>
+</li>
+<li><p>previousIndex()</p>
+</li>
+<li><p>remove()</p>
+</li>
+<li><p>set(E e)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ReentrantLock-and-synchronized"><a href="#ReentrantLock-and-synchronized" class="headerlink" title="ReentrantLock and synchronized"></a>ReentrantLock and synchronized</h2><p>ReentrantLock has bettern performance and can cross method.</p>
+<p>But synchronized is simple. So use it unless it is proven to be a problem.</p>
+<h2 id="Enumeration-and-Iterator"><a href="#Enumeration-and-Iterator" class="headerlink" title="Enumeration and Iterator"></a>Enumeration and Iterator</h2><p>Enumeration is faster than Iterator since Iterator may check fast fail while Enumeration don’t. Iterator also support modification. Enumeration is usually used in synced collection.</p>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><ul>
+<li><p>Non-blocking</p>
+<ul>
+<li><p>Dequeue (LinkedList and ArrayDeque are its children)</p>
+</li>
+<li><p>PriorityQueue (maintains a binary heap)</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Blocking (see notes on Concurrency)</p>
+<ul>
+<li><p>ArrayBlockingQueue</p>
+</li>
+<li><p>LinkedBlockingQueue</p>
+</li>
+<li><p>PriorityBlockingQueue</p>
+</li>
+<li><p>DelayedWorkQueue (in ScheduledThreadExecutor, this is actually also a binary heap)</p>
+</li>
+<li><p>DelayQueue (very similar to DeplayedWordQueue)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>HastSet 和 TreeSet  是Set的两个实现类。<br>HashSet依赖于HashMap，它实际上是通过HashMap实现的。HashSet中的元素是无序的。<br>TreeSet依赖于TreeMap，它实际上是通过TreeMap实现的。TreeSet中的元素是有序的。</p>
+<h2 id="Synchronized-collections"><a href="#Synchronized-collections" class="headerlink" title="Synchronized collections"></a>Synchronized collections</h2><p>CopyOnWriteArrayList</p>
+<p>Vector/Stack</p>
+<p>HashTable</p>
+<p>ConcurrentHashMap</p>
+<p>Collections.synchronizedXXX()</p>
+<h2 id="Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap"><a href="#Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap" class="headerlink" title="Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap"></a>Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap</h2><p><img src="/images/collection.png" alt=""><br>The “scalability issues” for Hashtable are present in exactly the same way in Collections.synchronizedMap(Map) - they use very simple synchronization, which means that only one thread can access the map at the same time.</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/01/books/" data-id="cje8muk700005jrpjdzy7k48s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/01/collections/" data-id="cje8muk740008jrpjtv50fz36" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂谈/">杂谈</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 
     </footer>
   </div>
@@ -103,10 +176,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2017/07/10/concurrency/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java Collection 源码阅读2
+        
+      </div>
+    </a>
   
-    <a href="/2017/12/28/NewZealand/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2017/05/01/javaMemory/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">新西兰之旅</div>
+      <div class="article-nav-title">javaMemory</div>
     </a>
   
 </nav>

@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Buscar"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,47 +60,6 @@
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="post-compiler" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/01/compiler/" class="article-date">
-  <time datetime="2018-03-01T14:30:43.000Z" itemprop="datePublished">2018-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/01/compiler/">How a compiler works</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>完美解释了如何从零开始写编译器<br><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">https://ruslanspivak.com/lsbasi-part1/</a> </p>
-<p>example:<br>Parsing<br>7 + 3 * (10 / (12 / (3 + 1) - 1)) </p>
-<p><img src="/images/compiler1.png" alt=""><br><img src="/images/compiler2.png" alt=""><br><img src="/images/compiler3.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/01/compiler/" data-id="cje8m2oyf0005eppjzb9vg7ar" class="article-share-link">Compartir</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="post-books" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -130,7 +89,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/01/books/" data-id="cje8m2oyj0008eppjvodm9wf5" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2018/02/01/books/" data-id="cje8muk700005jrpjdzy7k48s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂谈/">杂谈</a></li></ul>
@@ -170,10 +129,311 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/28/NewZealand/" data-id="cje8m2oxi0000eppjtpk2byvf" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2017/12/28/NewZealand/" data-id="cje8muk680000jrpjvdkbfii3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/游记/">游记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-concurrency" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/10/concurrency/" class="article-date">
+  <time datetime="2017-07-10T13:40:38.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/10/concurrency/">Java Collection 源码阅读2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Happen-before"><a href="#Happen-before" class="headerlink" title="Happen before"></a>Happen before</h2><p><a href="https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility" target="_blank" rel="noopener">https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility</a></p>
+<h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><p><a href="http://www.jianshu.com/p/0f1b4ae625e5" target="_blank" rel="noopener">http://www.jianshu.com/p/0f1b4ae625e5</a></p>
+<h2 id="Monitor-Condition"><a href="#Monitor-Condition" class="headerlink" title="Monitor/Condition"></a>Monitor/Condition</h2><ol>
+<li><p>Object, wait, notify, notifiyAll (the last two must be called when we get the object lock)</p>
+</li>
+<li><p>ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use “LockSupport.park and unpark” to suspend thread and wakeup thread</p>
+</li>
+</ol>
+<h2 id="Lock-and-Sync"><a href="#Lock-and-Sync" class="headerlink" title="Lock and Sync"></a>Lock and Sync</h2><p>See <a href="http://www.cnblogs.com/wanly3643/p/3835839.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/p/3835839.html</a></p>
+<p>Lock —-&gt;  AbstractQueuedSynchronizer —&gt; setState to communicate between threads, put waiting threads to a waiting list, use park to suspend threads and unpark to wake up threads</p>
+<p>ReentrantLock —-> Sync/FairSync/NonFairSync</p>
+<p>ReentrantReadWriteLock —> ReadLock/WriteLock, Sync/FairSync/NonFairSync</p>
+<p>Semphore –> Sync/FairSync/NonFairSync, allow limit number of share locking</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p><a href="http://www.cnblogs.com/wanly3643/category/437878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/category/437878.html</a></p>
+<ol>
+<li><p>Use volatile</p>
+</li>
+<li><p>Sync only in one bucket</p>
+</li>
+</ol>
+<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><ol>
+<li><p>They are using ReentrantLock and Condition to do syncing</p>
+</li>
+<li><p>BlockingQueue use lock and condition to implement the consumer and producer scenario</p>
+</li>
+<li><p>ArrayBlockingQueue needs one lock while LInkedBlockingQueue needs two</p>
+</li>
+<li><p>See notes in “Collection and Map” for all BlockingQueue classes</p>
+</li>
+</ol>
+<h2 id="Thread-State"><a href="#Thread-State" class="headerlink" title="Thread State:"></a>Thread State:</h2><p><a href="https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/</a></p>
+<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p><img src="/images/concurrency.png" alt=""></p>
+<ol>
+<li>How ThreadPoolExecutor controls the threads:</li>
+</ol>
+<p><a href="http://www.jianshu.com/p/65da61177eed" target="_blank" rel="noopener">http://www.jianshu.com/p/65da61177eed</a></p>
+<p>Submit process:</p>
+<p>Submit(Runnable) —&gt; execute(FutureTask(runnable)) –&gt; threadpool call runWorkers() –&gt; FutureTask.run –> FutureTask.finish –> unpark(waiting client threads) –&gt; worker thread continue to take task from workQueue</p>
+<p>ClientThread –> FutureTask.get –&gt; awaitDone –> park(client thread), waiting to be unparked by FutureTask.finish</p>
+<ol>
+<li>How ScheduledThreadPoolExecutor works:</li>
+</ol>
+<p>Same as ThreadPoolExecutor, but use a DelayWorkQueue as workQueue, which as deplay polling task.</p>
+<p>DelayWorkQueue contains ScheduleFutureTask, which is a FutureTask that will can check the delayTime before each run and add itself back to workQueue if it is set to repeatly run.</p>
+<p>DelayWorkQueue is actually similar to PriorityQueue, which maintains a binary heap, which compare by each element’s delay time.</p>
+<h2 id="ForkJoinPool"><a href="#ForkJoinPool" class="headerlink" title="ForkJoinPool"></a>ForkJoinPool</h2><p>See <a href="http://www.bijishequ.com/detail/520567?p=37" target="_blank" rel="noopener">http://www.bijishequ.com/detail/520567?p=37</a> for implementation detail</p>
+<p>Some tips:</p>
+<ol>
+<li><p>The pool maintains an array of WorkQueue</p>
+</li>
+<li><p>Each workQueue contains a ForkJoinThread, which is actually a thread can run to steal jobs and run its own taskQueue</p>
+</li>
+<li><p>Each taskQueue is an array of ForkJoinTask, which is a FutureTask</p>
+</li>
+<li><p>Each ForkJoinThread will get its own job from its queue using FILO, but steal job from other thread’s queue using FIFO</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/10/concurrency/" data-id="cje8muk77000bjrpj1xxdcur0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-collections" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/01/collections/" class="article-date">
+  <time datetime="2017-06-01T12:48:48.000Z" itemprop="datePublished">2017-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/01/collections/">Java Collection 源码阅读1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="How-fast-fail-happened-in-non-synced-collections"><a href="#How-fast-fail-happened-in-non-synced-collections" class="headerlink" title="How fast-fail happened in non-synced collections"></a>How fast-fail happened in non-synced collections</h2><p>(why modCount is not volatile: <a href="http://www.jianshu.com/p/d9ee4b075d5a" target="_blank" rel="noopener">http://www.jianshu.com/p/d9ee4b075d5a</a> )</p>
+<h2 id="Differences-between-Iterator-and-ListIterator"><a href="#Differences-between-Iterator-and-ListIterator" class="headerlink" title="Differences between Iterator and ListIterator"></a>Differences between Iterator and ListIterator</h2><ul>
+<li><p>Methods of Iterator (for list and set):</p>
+<ul>
+<li><p>hasNext()</p>
+</li>
+<li><p>next()</p>
+</li>
+<li><p>remove()</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Methods of ListIterator (only for list):</p>
+<ul>
+<li><p>add(E e)</p>
+</li>
+<li><p>hasNext()</p>
+</li>
+<li><p>hasPrevious()</p>
+</li>
+<li><p>next()</p>
+</li>
+<li><p>nextIndex()</p>
+</li>
+<li><p>previous()</p>
+</li>
+<li><p>previousIndex()</p>
+</li>
+<li><p>remove()</p>
+</li>
+<li><p>set(E e)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="ReentrantLock-and-synchronized"><a href="#ReentrantLock-and-synchronized" class="headerlink" title="ReentrantLock and synchronized"></a>ReentrantLock and synchronized</h2><p>ReentrantLock has bettern performance and can cross method.</p>
+<p>But synchronized is simple. So use it unless it is proven to be a problem.</p>
+<h2 id="Enumeration-and-Iterator"><a href="#Enumeration-and-Iterator" class="headerlink" title="Enumeration and Iterator"></a>Enumeration and Iterator</h2><p>Enumeration is faster than Iterator since Iterator may check fast fail while Enumeration don’t. Iterator also support modification. Enumeration is usually used in synced collection.</p>
+<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><ul>
+<li><p>Non-blocking</p>
+<ul>
+<li><p>Dequeue (LinkedList and ArrayDeque are its children)</p>
+</li>
+<li><p>PriorityQueue (maintains a binary heap)</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Blocking (see notes on Concurrency)</p>
+<ul>
+<li><p>ArrayBlockingQueue</p>
+</li>
+<li><p>LinkedBlockingQueue</p>
+</li>
+<li><p>PriorityBlockingQueue</p>
+</li>
+<li><p>DelayedWorkQueue (in ScheduledThreadExecutor, this is actually also a binary heap)</p>
+</li>
+<li><p>DelayQueue (very similar to DeplayedWordQueue)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>HastSet 和 TreeSet  是Set的两个实现类。<br>HashSet依赖于HashMap，它实际上是通过HashMap实现的。HashSet中的元素是无序的。<br>TreeSet依赖于TreeMap，它实际上是通过TreeMap实现的。TreeSet中的元素是有序的。</p>
+<h2 id="Synchronized-collections"><a href="#Synchronized-collections" class="headerlink" title="Synchronized collections"></a>Synchronized collections</h2><p>CopyOnWriteArrayList</p>
+<p>Vector/Stack</p>
+<p>HashTable</p>
+<p>ConcurrentHashMap</p>
+<p>Collections.synchronizedXXX()</p>
+<h2 id="Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap"><a href="#Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap" class="headerlink" title="Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap"></a>Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap</h2><p><img src="/images/collection.png" alt=""><br>The “scalability issues” for Hashtable are present in exactly the same way in Collections.synchronizedMap(Map) - they use very simple synchronization, which means that only one thread can access the map at the same time.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/01/collections/" data-id="cje8muk740008jrpjtv50fz36" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-javaMemory" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/01/javaMemory/" class="article-date">
+  <time datetime="2017-05-01T13:37:06.000Z" itemprop="datePublished">2017-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/01/javaMemory/">javaMemory</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>Integer contains meta data, not only the int value. The size is usually 4 times of int. An array is bigger since it needs to store the length</p>
+</li>
+<li><p>HashSet is a wrapper of HashMap. An empty HashSet/HashMap already contains 16 objects (default size) and the size is more 100 bytes. Everytime we do “put”, it will create new object “Entry”.</p>
+</li>
+<li><p>HashTable is synchronized and HashMap is not. Vector (also Stack) is synchronized and ArrayList is not.</p>
+</li>
+<li><p>Overhead of collections:<br><img src="/images/javaMemory1.png" alt=""></p>
+</li>
+<li><p>Java application memory<br><img src="/images/javaMemory2.png" alt=""></p>
+</li>
+<li><p>Compressed reference/compressed OOPs could reduce java heap usage when migrate from 32 bit to 64 bit platform. But it doesn’t do the same for java native heap</p>
+</li>
+<li><p>How heap and stack work together:<br><img src="/images/javaMemory3.png" alt=""></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/01/javaMemory/" data-id="cje8muk7c000ejrpjkharamt1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-compiler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/01/compiler/" class="article-date">
+  <time datetime="2017-02-01T12:30:43.000Z" itemprop="datePublished">2017-02-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/01/compiler/">How a compiler works</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>完美解释了如何从零开始写编译器<br><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">https://ruslanspivak.com/lsbasi-part1/</a> </p>
+<p>example:<br>Parsing<br>7 + 3 * (10 / (12 / (3 + 1) - 1)) </p>
+<p><img src="/images/compiler1.png" alt=""><br><img src="/images/compiler2.png" alt=""><br><img src="/images/compiler3.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/01/compiler/" data-id="cje8muk760009jrpjnb3p77gx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/">compiler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li></ul>
 
     </footer>
   </div>
@@ -245,7 +505,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/03/git/" data-id="cje8m2oyn0009eppjwzdqwl2s" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2015/05/03/git/" data-id="cje8muk7a000cjrpjlprt4msp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
@@ -299,7 +559,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/02/03/PRML3/" data-id="cje8m2oy90004eppjeiusp3p4" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2014/02/03/PRML3/" data-id="cje8muk6q0003jrpjt0a18u1x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
@@ -377,7 +637,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/01/29/PRML2/" data-id="cje8m2oy50003eppjom66jvc4" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2014/01/29/PRML2/" data-id="cje8muk6t0004jrpja6ijuf7w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
@@ -443,7 +703,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/01/27/PRML1/" data-id="cje8m2oxr0001eppjuwk6f5wg" class="article-share-link">Compartir</a>
+      <a data-url="http://yoursite.com/2014/01/27/PRML1/" data-id="cje8muk6f0001jrpjrfdt9nuv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
@@ -468,7 +728,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游记/">游记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Machine-Learning/">Machine Learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂谈/">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/游记/">游记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
     </div>
   </div>
 
@@ -476,18 +736,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nube de Tags</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Machine-Learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a> <a href="/tags/阅读/" style="font-size: 16.67px;">阅读</a>
+      <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Machine-Learning/" style="font-size: 13.33px;">Machine Learning</a> <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/技术/" style="font-size: 20px;">技术</a> <a href="/tags/杂谈/" style="font-size: 10px;">杂谈</a> <a href="/tags/游记/" style="font-size: 10px;">游记</a> <a href="/tags/阅读/" style="font-size: 16.67px;">阅读</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">January 2014</a></li></ul>
     </div>
   </div>
 
@@ -495,13 +755,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Posts recientes</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2018/03/01/compiler/">How a compiler works</a>
-          </li>
         
           <li>
             <a href="/2018/02/01/books/">想读的书单</a>
@@ -512,11 +768,15 @@
           </li>
         
           <li>
-            <a href="/2015/05/03/git/">git学习笔记</a>
+            <a href="/2017/07/10/concurrency/">Java Collection 源码阅读2</a>
           </li>
         
           <li>
-            <a href="/2014/02/03/PRML3/">PRML阅读笔记3</a>
+            <a href="/2017/06/01/collections/">Java Collection 源码阅读1</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/01/javaMemory/">javaMemory</a>
           </li>
         
       </ul>
@@ -532,7 +792,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Qiawu Cai<br>
-      Construido por <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
