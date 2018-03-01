@@ -5,19 +5,23 @@
   
 
   
-  <title>PRML阅读笔记3 | 沉默的愤青</title>
+  <title>git学习笔记 | 沉默的愤青</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="继续啃PRML第八章：Basic notation:node –&amp;gt; random variable or group of random variableslink –&amp;gt; probabilistic relation shipnotation of random var and non-random var, observed and unobserved varConditional">
+  <meta name="description" content="开始阅读git权威指南 第一章： 1、diff和patch的联合使用 2、cvs -&amp;gt; svn -&amp;gt; git 第二章和第三章： 废话太多，过 第四章： 命令： git –version git config 和 git config–global 和 git config –system 三种命令 git init 初始化当前目录，生成 .git目录，即版本库（此目录只在根目录下有）">
 <meta name="keywords" content="阅读,技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PRML阅读笔记3">
-<meta property="og:url" content="http://yoursite.com/2014/02/03/PRML3/index.html">
+<meta property="og:title" content="git学习笔记">
+<meta property="og:url" content="http://yoursite.com/2015/05/03/git/index.html">
 <meta property="og:site_name" content="沉默的愤青">
-<meta property="og:description" content="继续啃PRML第八章：Basic notation:node –&amp;gt; random variable or group of random variableslink –&amp;gt; probabilistic relation shipnotation of random var and non-random var, observed and unobserved varConditional">
-<meta property="og:updated_time" content="2018-03-01T13:18:37.000Z">
+<meta property="og:description" content="开始阅读git权威指南 第一章： 1、diff和patch的联合使用 2、cvs -&amp;gt; svn -&amp;gt; git 第二章和第三章： 废话太多，过 第四章： 命令： git –version git config 和 git config–global 和 git config –system 三种命令 git init 初始化当前目录，生成 .git目录，即版本库（此目录只在根目录下有）">
+<meta property="og:image" content="http://s7.sinaimg.cn/mw690/001hbb8fgy6Gc5Cvs6ab6&690">
+<meta property="og:image" content="http://s12.sinaimg.cn/mw690/001hbb8fgy6Gc6fCnH5cb&690">
+<meta property="og:image" content="http://s1.sinaimg.cn/mw690/001hbb8fgy6Gc6sLKxi50&690">
+<meta property="og:updated_time" content="2018-03-01T13:21:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PRML阅读笔记3">
-<meta name="twitter:description" content="继续啃PRML第八章：Basic notation:node –&amp;gt; random variable or group of random variableslink –&amp;gt; probabilistic relation shipnotation of random var and non-random var, observed and unobserved varConditional">
+<meta name="twitter:title" content="git学习笔记">
+<meta name="twitter:description" content="开始阅读git权威指南 第一章： 1、diff和patch的联合使用 2、cvs -&amp;gt; svn -&amp;gt; git 第二章和第三章： 废话太多，过 第四章： 命令： git –version git config 和 git config–global 和 git config –system 三种命令 git init 初始化当前目录，生成 .git目录，即版本库（此目录只在根目录下有）">
+<meta name="twitter:image" content="http://s7.sinaimg.cn/mw690/001hbb8fgy6Gc5Cvs6ab6&690">
   
     <link rel="alternate" href="/atom.xml" title="沉默的愤青" type="application/atom+xml">
   
@@ -64,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-PRML3" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/02/03/PRML3/" class="article-date">
-  <time datetime="2014-02-03T11:09:34.000Z" itemprop="datePublished">2014-02-03</time>
+    <a href="/2015/05/03/git/" class="article-date">
+  <time datetime="2015-05-03T02:19:50.000Z" itemprop="datePublished">2015-05-03</time>
 </a>
     
   </div>
@@ -78,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PRML阅读笔记3
+      git学习笔记
     </h1>
   
 
@@ -86,27 +90,48 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>继续啃PRML<br>第八章：<br>Basic notation:<br>node –&gt; random variable or group of random variables<br>link –&gt; probabilistic relation ship<br>notation of random var and non-random var, observed and unobserved var<br>Conditional Independence:<br>three example: block means independent conditionally</p>
-<pre><code>1. tail-tail, observed(block), unobserved(unblock)
-2. head-tail, observed(block), unobserved(unblock)
-3. head-head, observed(unblock), unobserved(block)
-</code></pre><p>D-separation theorm: regrard graph as filter for distribution p(x)<br>Markov blanket/Markov boundary<br>Directed graphical model –&gt; Bayesian Networks:<br>Discrete variables: three ways to control number of parameters</p>
-<pre><code>1. chain nodes
-2. sharing parameters
-3. model with latent parameter
-</code></pre><p>Continues variables: Linear-Gaussian model<br>Undirected graphical model –&gt; Markov random field：<br>conditional independence property in undirected graph<br>factorization property in directed graph<br>potential function and energy function<br>how to convert directed graph to undirected and vice versa<br>I map, D map, perfect map<br>Inference:<br>chain: using potential function, local messages pass to get an efficient algorithm<br>trees: undirected tree, directed tree, polytree, use efficient algorithm in a broader situation<br>factor graph:<br>translate directed and undirected graph to factor graph to become tree<br>sum-product algorithm: read it later<br>max-sum algorithm: read it later</p>
-<p>important view:</p>
-<ol>
-<li>Basic notation</li>
-<li>Conditional property and factorization property</li>
-<li>Directed graphical model –&gt; Bayesian Networks, Undirected graphical model –&gt; Markov random field</li>
-<li>Inference in graphical model</li>
-</ol>
+        <p>开始阅读git权威指南</p>
+<p>第一章：</p>
+<p>1、diff和patch的联合使用</p>
+<p>2、cvs -&gt; svn -&gt; git</p>
+<p>第二章和第三章：</p>
+<p>废话太多，过</p>
+<p>第四章：</p>
+<p>命令：</p>
+<p>git –version</p>
+<p>git config 和 git config–global 和 git config –system 三种命令</p>
+<p>git init 初始化当前目录，生成 .git目录，即版本库（此目录只在根目录下有）</p>
+<p>git add 和 git commit （这两个命令常用，可以设置别名）</p>
+<p>第五章：</p>
+<p>概念：</p>
+<p>git 暂存区（stage）</p>
+<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc5Cvs6ab6" target="_blank" rel="noopener"><img src="http://s7.sinaimg.cn/mw690/001hbb8fgy6Gc5Cvs6ab6&amp;690" alt=""></a>  </p>
+<p>注：左侧是工作区，右侧是.git目录下的所有东西，其中index就是所谓的暂存区，objects是实体对象库，HEAD是master所在分支</p>
+<p>注：add 命令之后会把工作区的内容存到暂存区，commit命令之后才会把暂存区的内容存到master分支中</p>
+<p>命令：</p>
+<p>git diff（工作区和暂存区比较） 和 git diff –cached（暂存区和HEAD比较）和 git diff HEAD（工作区和HEAD比较）</p>
+<p>git status 的输出（加 -s 选择可以得到简略的输出，记住其中第一个M和第二个M的意义）</p>
+<p>第六章、第七章和第八章：</p>
+<p>概念：</p>
+<p>对象ID（40位十六进制的SHA1哈希值）</p>
+<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc6fCnH5cb" target="_blank" rel="noopener"><img src="http://s12.sinaimg.cn/mw690/001hbb8fgy6Gc6fCnH5cb&amp;690" alt=""></a>  </p>
+<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc6sLKxi50" target="_blank" rel="noopener"><img src="http://s1.sinaimg.cn/mw690/001hbb8fgy6Gc6sLKxi50&amp;690" alt=""></a>  </p>
+<p>命令：</p>
+<p>git branch 查看当前所在的分支</p>
+<p>git log 可以查看提交的记录（常用的选项包括 –graph 和 –oneline）</p>
+<p>git log -l HEAD/master 可以查看HEAD或者master指向的commit结构</p>
+<p>git rev-parse HEAD/master 可以得到他们的对象ID</p>
+<p>linux 命令中的 sha1sum</p>
+<p>git reset 可以重新设置master分支到任意一个commit（如 HEAD^，即HEAD的上一个commit）</p>
+<p>reflog可以用来记录改变的分支操作，以防止误操作导致指针指向无法找回</p>
+<p>git checkout可以重置 HEAD指针</p>
+<p>git merge + 对象ID 可以把某个commit 合并到master分支中</p>
+<p>（git reset 和 git checkout 两个命令的详细用法见原书第七和第八章）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/02/03/PRML3/" data-id="cje8jgnvq0004z1pjwcvvssj9" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2015/05/03/git/" data-id="cje8jgnvw0005z1pjqs4xjwzc" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术/">技术</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阅读/">阅读</a></li></ul>
@@ -117,19 +142,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/05/03/git/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/12/28/NewZealand/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
-          git学习笔记
+          新西兰之旅
         
       </div>
     </a>
   
   
-    <a href="/2014/01/29/PRML2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2014/02/03/PRML3/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">PRML阅读笔记2</div>
+      <div class="article-nav-title">PRML阅读笔记3</div>
     </a>
   
 </nav>
