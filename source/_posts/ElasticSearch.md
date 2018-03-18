@@ -1,6 +1,6 @@
 ---
 title: ElasticSearch Inside(1)
-date: 2017-11-20 20:30:43
+date: 2017-09-20 20:30:43
 tags:
 - 技术
 - Open Source
@@ -30,9 +30,9 @@ Other nodes: coordinating only, etc.
 1. New documents are collected in an in-memory indexing buffer
 
 2. Every so often, the buffer is commited:
-..* A new segment—a supplementary inverted index—is written to disk.
-..* A new commit point is written to disk, which includes the name of the new segment.
-..* The disk is fsync’ed—all writes waiting in the filesystem cache are flushed to disk, to ensure that they have been physically written.
+    * A new segment—a supplementary inverted index—is written to disk.
+    * A new commit point is written to disk, which includes the name of the new segment.
+    * The disk is fsync’ed—all writes waiting in the filesystem cache are flushed to disk, to ensure that they have been physically written.
 3. The new segment is opened, making the documents it contains visible to search.
 4. The in-memory buffer is cleared, and is ready to accept new documents.
 
