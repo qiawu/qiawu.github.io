@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="Compilerimport components:  Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
+<meta name="description" content="Core Components: Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
 <meta name="keywords" content="技术,Compiler">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How a compiler works">
 <meta property="og:url" content="http://yoursite.com/2017/02/01/compiler/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="Compilerimport components:  Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
+<meta property="og:description" content="Core Components: Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/Compiler1.png">
 <meta property="og:image" content="http://yoursite.com/images/Compiler2.png">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://yoursite.com/images/Compiler5.png">
 <meta property="og:image" content="http://yoursite.com/images/Compiler6.png">
 <meta property="og:image" content="http://yoursite.com/images/Compiler7.png">
-<meta property="og:updated_time" content="2018-03-18T13:53:38.000Z">
+<meta property="og:updated_time" content="2018-03-18T13:56:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="How a compiler works">
-<meta name="twitter:description" content="Compilerimport components:  Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
+<meta name="twitter:description" content="Core Components: Lexical Analyzer AST Parser Interpreter (use visitor pattern to traverse the AST) Symbol table">
 <meta name="twitter:image" content="http://yoursite.com/images/Compiler1.png">
 
 
@@ -308,8 +308,7 @@
       
 
       
-        <h2 id="Compiler"><a href="#Compiler" class="headerlink" title="Compiler"></a>Compiler</h2><p>import components:</p>
-<ol>
+        <h2 id="Core-Components"><a href="#Core-Components" class="headerlink" title="Core Components:"></a>Core Components:</h2><ol>
 <li>Lexical Analyzer</li>
 <li>AST Parser</li>
 <li>Interpreter (use visitor pattern to traverse the AST)</li>
@@ -318,8 +317,8 @@
 </ol>
 <p><img src="/images/Compiler1.png" alt=""></p>
 <h2 id="AST"><a href="#AST" class="headerlink" title="AST"></a>AST</h2><h3 id="context-free-grammers"><a href="#context-free-grammers" class="headerlink" title="context-free grammers"></a>context-free grammers</h3><p>example:<br>Parsing<br>7 + 3 * (10 / (12 / (3 + 1) - 1))<br><img src="/images/Compiler2.png" alt=""><br><img src="/images/Compiler3.png" alt=""><br><img src="/images/Compiler4.png" alt=""></p>
-<p>context-free grammers to AST:<br><img src="/images/Compiler5.png" alt=""></p>
-<p>parsing a programe:<br><img src="/images/Compiler6.png" alt=""><br><img src="/images/Compiler7.png" alt=""></p>
+<h3 id="context-free-grammers-to-AST"><a href="#context-free-grammers-to-AST" class="headerlink" title="context-free grammers to AST:"></a>context-free grammers to AST:</h3><p><img src="/images/Compiler5.png" alt=""></p>
+<h3 id="parsing-a-programe"><a href="#parsing-a-programe" class="headerlink" title="parsing a programe:"></a>parsing a programe:</h3><p><img src="/images/Compiler6.png" alt=""><br><img src="/images/Compiler7.png" alt=""></p>
 
       
     </div>
@@ -487,7 +486,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Compiler"><span class="nav-number">1.</span> <span class="nav-text">Compiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AST"><span class="nav-number">2.</span> <span class="nav-text">AST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#context-free-grammers"><span class="nav-number">2.1.</span> <span class="nav-text">context-free grammers</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Core-Components"><span class="nav-number">1.</span> <span class="nav-text">Core Components:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AST"><span class="nav-number">2.</span> <span class="nav-text">AST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#context-free-grammers"><span class="nav-number">2.1.</span> <span class="nav-text">context-free grammers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-free-grammers-to-AST"><span class="nav-number">2.2.</span> <span class="nav-text">context-free grammers to AST:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parsing-a-programe"><span class="nav-number">2.3.</span> <span class="nav-text">parsing a programe:</span></a></li></ol></li></ol></div>
             
 
           </div>
