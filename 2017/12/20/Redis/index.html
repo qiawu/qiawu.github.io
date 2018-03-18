@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="技术,Java," />
+  <meta name="keywords" content="技术,Open Source,Redis," />
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
-<meta name="keywords" content="技术,Java">
+<meta name="description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta name="keywords" content="技术,Open Source,Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Collection 源码阅读2">
-<meta property="og:url" content="http://yoursite.com/2017/07/10/concurrency/index.html">
+<meta property="og:title" content="Redis Inside(1)">
+<meta property="og:url" content="http://yoursite.com/2017/12/20/Redis/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
+<meta property="og:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/concurrency.png">
-<meta property="og:updated_time" content="2018-03-03T10:18:47.000Z">
+<meta property="og:updated_time" content="2018-03-18T13:05:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Collection 源码阅读2">
-<meta name="twitter:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
-<meta name="twitter:image" content="http://yoursite.com/images/concurrency.png">
+<meta name="twitter:title" content="Redis Inside(1)">
+<meta name="twitter:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/10/concurrency/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/20/Redis/"/>
 
 
 
 
 
-  <title>Java Collection 源码阅读2 | 抓瓢虫的少年</title>
+  <title>Redis Inside(1) | 抓瓢虫的少年</title>
   
 
 
@@ -235,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/concurrency/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiawu Cai">
@@ -252,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Collection 源码阅读2</h1>
+          <h1 class="post-title" itemprop="name headline">Redis Inside(1)</h1>
         
 
         <div class="post-meta">
@@ -264,8 +262,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T21:40:38+08:00">
-                2017-07-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T21:30:43+08:00">
+                2017-12-20
               </time>
             
 
@@ -302,65 +300,33 @@
       
 
       
-        <h2 id="Happen-before"><a href="#Happen-before" class="headerlink" title="Happen before"></a>Happen before</h2><p><a href="https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility" target="_blank" rel="noopener">https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility</a></p>
-<h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><p><a href="http://www.jianshu.com/p/0f1b4ae625e5" target="_blank" rel="noopener">http://www.jianshu.com/p/0f1b4ae625e5</a></p>
-<h2 id="Monitor-Condition"><a href="#Monitor-Condition" class="headerlink" title="Monitor/Condition"></a>Monitor/Condition</h2><ol>
-<li><p>Object, wait, notify, notifiyAll (the last two must be called when we get the object lock)</p>
-</li>
-<li><p>ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use “LockSupport.park and unpark” to suspend thread and wakeup thread</p>
-</li>
-</ol>
-<h2 id="Lock-and-Sync"><a href="#Lock-and-Sync" class="headerlink" title="Lock and Sync"></a>Lock and Sync</h2><p>See <a href="http://www.cnblogs.com/wanly3643/p/3835839.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/p/3835839.html</a></p>
-<p>Lock —-&gt;  AbstractQueuedSynchronizer —&gt; setState to communicate between threads, put waiting threads to a waiting list, use park to suspend threads and unpark to wake up threads</p>
-<p>ReentrantLock —-> Sync/FairSync/NonFairSync</p>
-<p>ReentrantReadWriteLock —> ReadLock/WriteLock, Sync/FairSync/NonFairSync</p>
-<p>Semphore –> Sync/FairSync/NonFairSync, allow limit number of share locking</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p><a href="http://www.cnblogs.com/wanly3643/category/437878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/category/437878.html</a></p>
+        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Redis supports lots of data types:</p>
 <ol>
-<li><p>Use volatile</p>
-</li>
-<li><p>Sync only in one bucket</p>
-</li>
+<li>string</li>
+<li>list</li>
+<li>set</li>
+<li>hash (k-v map)<br>etc.<br>Examples:</li>
 </ol>
-<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><ol>
-<li><p>They are using ReentrantLock and Condition to do syncing</p>
-</li>
-<li><p>BlockingQueue use lock and condition to implement the consumer and producer scenario</p>
-</li>
-<li><p>ArrayBlockingQueue needs one lock while LInkedBlockingQueue needs two</p>
-</li>
-<li><p>See notes in “Collection and Map” for all BlockingQueue classes</p>
-</li>
+<h2 id="Single-Machine-Redis"><a href="#Single-Machine-Redis" class="headerlink" title="Single Machine Redis"></a>Single Machine Redis</h2><ol>
+<li>Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:<br>..<em> RDB: store the compress the k-v db into disk<br>..</em> AOF: store change log of cmd</li>
+<li>a single machine redis can operate multiple dbs. (in a distributed mode, a redis can only operate one db)</li>
+<li>server logic:<br>..<em> handle IO event (client request) and time event. It is event driven.<br>..</em> Reactor pattern<br>..* Single thread</li>
 </ol>
-<h2 id="Thread-State"><a href="#Thread-State" class="headerlink" title="Thread State:"></a>Thread State:</h2><p><a href="https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/</a></p>
-<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p><img src="/images/concurrency.png" alt=""></p>
-<ol>
-<li>How ThreadPoolExecutor controls the threads:</li>
+<h2 id="Distributed-Redis"><a href="#Distributed-Redis" class="headerlink" title="Distributed Redis"></a>Distributed Redis</h2><ol>
+<li>Support Master-Slave mode. (Master will sync up its data with slave)</li>
+<li>Use Sentinel will monitor Master health</li>
+<li>Each node in the cluster will maitain the current cluster state: including some health tag, shard-to-slot mapping</li>
+<li>Node(shard): responsible for a number of slots. Each node has only one db<br>..<em> key send to node A<br>..</em> node A check if the key is in its slots<br>..<em> if no, return the target node<br>..</em> if yes, execute the cmd (find the key’s value or insert the k-v into its db)</li>
 </ol>
-<p><a href="http://www.jianshu.com/p/65da61177eed" target="_blank" rel="noopener">http://www.jianshu.com/p/65da61177eed</a></p>
-<pre><code>Submit process:
-
-Submit(Runnable) ---&gt; execute(FutureTask(runnable)) --&gt; threadpool call runWorkers() --&gt; FutureTask.run --\&gt; FutureTask.finish --\&gt; unpark(waiting client threads) --&gt; worker thread continue to take task from workQueue
-
-ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread), waiting to be unparked by FutureTask.finish
-</code></pre><ol>
-<li><p>How ScheduledThreadPoolExecutor works:</p>
-<p>Same as ThreadPoolExecutor, but use a DelayWorkQueue as workQueue, which as deplay polling task.</p>
-<p>DelayWorkQueue contains ScheduleFutureTask, which is a FutureTask that will can check the delayTime before each run and add itself back to workQueue if it is set to repeatly run.</p>
-<p>DelayWorkQueue is actually similar to PriorityQueue, which maintains a binary heap, which compare by each element’s delay time.</p>
-</li>
+<h2 id="Other-features"><a href="#Other-features" class="headerlink" title="Other features"></a>Other features</h2><ol>
+<li>Lua<br>..<em> reduce network cost. We can do multiple cmds in the lua scripts so one request is only needed to do the same<br>..</em> atomic in a lua. No other cmds will be executed in the middle of lua<br>..* we can reuse the lua script in the client any time.</li>
+<li>Pub-Sub<br>..<em> support simple regex pattern match to topics<br>..</em> If subscribers are not online, the message will lost</li>
 </ol>
-<h2 id="ForkJoinPool"><a href="#ForkJoinPool" class="headerlink" title="ForkJoinPool"></a>ForkJoinPool</h2><p>See <a href="http://www.bijishequ.com/detail/520567?p=37" target="_blank" rel="noopener">http://www.bijishequ.com/detail/520567?p=37</a> for implementation detail</p>
-<p>Some tips:</p>
-<ol>
-<li><p>The pool maintains an array of WorkQueue</p>
-</li>
-<li><p>Each workQueue contains a ForkJoinThread, which is actually a thread can run to steal jobs and run its own taskQueue</p>
-</li>
-<li><p>Each taskQueue is an array of ForkJoinTask, which is a FutureTask</p>
-</li>
-<li><p>Each ForkJoinThread will get its own job from its queue using FILO, but steal job from other thread’s queue using FIFO</p>
-</li>
+<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><ol>
+<li>find top K hot XXXX in a website</li>
+<li>find recent visited records</li>
+<li>sanity check of a request (i.e., if the user id is marched with some fields)</li>
+<li>statistic: i.e., count how many users are registered, how many visited, etc.</li>
 </ol>
 
       
@@ -381,7 +347,9 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
           
             <a href="/tags/技术/" rel="tag"># 技术</a>
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/Open-Source/" rel="tag"># Open Source</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
           
         </div>
       
@@ -394,8 +362,8 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/01/collections/" rel="next" title="Java Collection 源码阅读1">
-                <i class="fa fa-chevron-left"></i> Java Collection 源码阅读1
+              <a href="/2017/12/01/books/" rel="next" title="想读的书单">
+                <i class="fa fa-chevron-left"></i> 想读的书单
               </a>
             
           </div>
@@ -404,8 +372,8 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/20/ElasticSearch/" rel="prev" title="ElasticSearch Inside(1)">
-                ElasticSearch Inside(1) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/28/NewZealand/" rel="prev" title="新西兰--一个被上帝眷顾的地方">
+                新西兰--一个被上帝眷顾的地方 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -529,7 +497,7 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Happen-before"><span class="nav-number">1.</span> <span class="nav-text">Happen before</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomic"><span class="nav-number">2.</span> <span class="nav-text">Atomic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor-Condition"><span class="nav-number">3.</span> <span class="nav-text">Monitor/Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock-and-Sync"><span class="nav-number">4.</span> <span class="nav-text">Lock and Sync</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">5.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BlockingQueue"><span class="nav-number">6.</span> <span class="nav-text">BlockingQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-State"><span class="nav-number">7.</span> <span class="nav-text">Thread State:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executor"><span class="nav-number">8.</span> <span class="nav-text">Executor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ForkJoinPool"><span class="nav-number">9.</span> <span class="nav-text">ForkJoinPool</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Machine-Redis"><span class="nav-number">2.</span> <span class="nav-text">Single Machine Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-Redis"><span class="nav-number">3.</span> <span class="nav-text">Distributed Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-features"><span class="nav-number">4.</span> <span class="nav-text">Other features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-cases"><span class="nav-number">5.</span> <span class="nav-text">Use cases</span></a></li></ol></div>
             
 
           </div>

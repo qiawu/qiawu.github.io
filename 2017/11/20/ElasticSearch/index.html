@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="技术,Java," />
+  <meta name="keywords" content="技术,Open Source,ElasticSearch," />
 
 
 
@@ -79,20 +79,24 @@
 
 
 
-<meta name="description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
-<meta name="keywords" content="技术,Java">
+<meta name="description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
+<meta name="keywords" content="技术,Open Source,ElasticSearch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java Collection 源码阅读2">
-<meta property="og:url" content="http://yoursite.com/2017/07/10/concurrency/index.html">
+<meta property="og:title" content="ElasticSearch Inside(1)">
+<meta property="og:url" content="http://yoursite.com/2017/11/20/ElasticSearch/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
+<meta property="og:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/concurrency.png">
-<meta property="og:updated_time" content="2018-03-03T10:18:47.000Z">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch1.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch2.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch3.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch4.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch5.png">
+<meta property="og:updated_time" content="2018-03-18T13:06:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java Collection 源码阅读2">
-<meta name="twitter:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
-<meta name="twitter:image" content="http://yoursite.com/images/concurrency.png">
+<meta name="twitter:title" content="ElasticSearch Inside(1)">
+<meta name="twitter:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
+<meta name="twitter:image" content="http://yoursite.com/images/ElasticSearch1.png">
 
 
 
@@ -122,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/10/concurrency/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/20/ElasticSearch/"/>
 
 
 
 
 
-  <title>Java Collection 源码阅读2 | 抓瓢虫的少年</title>
+  <title>ElasticSearch Inside(1) | 抓瓢虫的少年</title>
   
 
 
@@ -235,7 +239,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/concurrency/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/20/ElasticSearch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiawu Cai">
@@ -252,7 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java Collection 源码阅读2</h1>
+          <h1 class="post-title" itemprop="name headline">ElasticSearch Inside(1)</h1>
         
 
         <div class="post-meta">
@@ -264,8 +268,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-10T21:40:38+08:00">
-                2017-07-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-20T20:30:43+08:00">
+                2017-11-20
               </time>
             
 
@@ -302,66 +306,23 @@
       
 
       
-        <h2 id="Happen-before"><a href="#Happen-before" class="headerlink" title="Happen before"></a>Happen before</h2><p><a href="https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility" target="_blank" rel="noopener">https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility</a></p>
-<h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><p><a href="http://www.jianshu.com/p/0f1b4ae625e5" target="_blank" rel="noopener">http://www.jianshu.com/p/0f1b4ae625e5</a></p>
-<h2 id="Monitor-Condition"><a href="#Monitor-Condition" class="headerlink" title="Monitor/Condition"></a>Monitor/Condition</h2><ol>
-<li><p>Object, wait, notify, notifiyAll (the last two must be called when we get the object lock)</p>
-</li>
-<li><p>ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use “LockSupport.park and unpark” to suspend thread and wakeup thread</p>
-</li>
-</ol>
-<h2 id="Lock-and-Sync"><a href="#Lock-and-Sync" class="headerlink" title="Lock and Sync"></a>Lock and Sync</h2><p>See <a href="http://www.cnblogs.com/wanly3643/p/3835839.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/p/3835839.html</a></p>
-<p>Lock —-&gt;  AbstractQueuedSynchronizer —&gt; setState to communicate between threads, put waiting threads to a waiting list, use park to suspend threads and unpark to wake up threads</p>
-<p>ReentrantLock —-> Sync/FairSync/NonFairSync</p>
-<p>ReentrantReadWriteLock —> ReadLock/WriteLock, Sync/FairSync/NonFairSync</p>
-<p>Semphore –> Sync/FairSync/NonFairSync, allow limit number of share locking</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p><a href="http://www.cnblogs.com/wanly3643/category/437878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/category/437878.html</a></p>
+        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>ES and Relational Database:<br>Elasticsearch Index == Database<br>Types == Tables<br>Properties == Schema</p>
+<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="/images/ElasticSearch1.png" alt=""></p>
+<p>Master Node: maintaining the global state of the cluster.<br>Data-only Node: hold data and handle CRUD operations on data<br>Other nodes: coordinating only, etc.</p>
+<h2 id="Common-Operations"><a href="#Common-Operations" class="headerlink" title="Common Operations"></a>Common Operations</h2><h3 id="Add-an-index"><a href="#Add-an-index" class="headerlink" title="Add an index"></a>Add an index</h3><p><img src="/images/ElasticSearch2.png" alt=""></p>
+<h3 id="Add-a-doc"><a href="#Add-a-doc" class="headerlink" title="Add a doc"></a>Add a doc</h3><p><img src="/images/ElasticSearch3.png" alt=""></p>
 <ol>
-<li><p>Use volatile</p>
+<li><p>New documents are collected in an in-memory indexing buffer</p>
 </li>
-<li><p>Sync only in one bucket</p>
+<li><p>Every so often, the buffer is commited:<br>..<em> A new segment—a supplementary inverted index—is written to disk.<br>..</em> A new commit point is written to disk, which includes the name of the new segment.<br>..* The disk is fsync’ed—all writes waiting in the filesystem cache are flushed to disk, to ensure that they have been physically written.</p>
 </li>
+<li>The new segment is opened, making the documents it contains visible to search.</li>
+<li>The in-memory buffer is cleared, and is ready to accept new documents.</li>
 </ol>
-<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><ol>
-<li><p>They are using ReentrantLock and Condition to do syncing</p>
-</li>
-<li><p>BlockingQueue use lock and condition to implement the consumer and producer scenario</p>
-</li>
-<li><p>ArrayBlockingQueue needs one lock while LInkedBlockingQueue needs two</p>
-</li>
-<li><p>See notes in “Collection and Map” for all BlockingQueue classes</p>
-</li>
-</ol>
-<h2 id="Thread-State"><a href="#Thread-State" class="headerlink" title="Thread State:"></a>Thread State:</h2><p><a href="https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/</a></p>
-<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p><img src="/images/concurrency.png" alt=""></p>
-<ol>
-<li>How ThreadPoolExecutor controls the threads:</li>
-</ol>
-<p><a href="http://www.jianshu.com/p/65da61177eed" target="_blank" rel="noopener">http://www.jianshu.com/p/65da61177eed</a></p>
-<pre><code>Submit process:
-
-Submit(Runnable) ---&gt; execute(FutureTask(runnable)) --&gt; threadpool call runWorkers() --&gt; FutureTask.run --\&gt; FutureTask.finish --\&gt; unpark(waiting client threads) --&gt; worker thread continue to take task from workQueue
-
-ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread), waiting to be unparked by FutureTask.finish
-</code></pre><ol>
-<li><p>How ScheduledThreadPoolExecutor works:</p>
-<p>Same as ThreadPoolExecutor, but use a DelayWorkQueue as workQueue, which as deplay polling task.</p>
-<p>DelayWorkQueue contains ScheduleFutureTask, which is a FutureTask that will can check the delayTime before each run and add itself back to workQueue if it is set to repeatly run.</p>
-<p>DelayWorkQueue is actually similar to PriorityQueue, which maintains a binary heap, which compare by each element’s delay time.</p>
-</li>
-</ol>
-<h2 id="ForkJoinPool"><a href="#ForkJoinPool" class="headerlink" title="ForkJoinPool"></a>ForkJoinPool</h2><p>See <a href="http://www.bijishequ.com/detail/520567?p=37" target="_blank" rel="noopener">http://www.bijishequ.com/detail/520567?p=37</a> for implementation detail</p>
-<p>Some tips:</p>
-<ol>
-<li><p>The pool maintains an array of WorkQueue</p>
-</li>
-<li><p>Each workQueue contains a ForkJoinThread, which is actually a thread can run to steal jobs and run its own taskQueue</p>
-</li>
-<li><p>Each taskQueue is an array of ForkJoinTask, which is a FutureTask</p>
-</li>
-<li><p>Each ForkJoinThread will get its own job from its queue using FILO, but steal job from other thread’s queue using FIFO</p>
-</li>
-</ol>
+<h3 id="Query-on-an-index"><a href="#Query-on-an-index" class="headerlink" title="Query on an index"></a>Query on an index</h3><p><img src="/images/ElasticSearch4.png" alt=""></p>
+<h3 id="Delete-Update-an-index-doc"><a href="#Delete-Update-an-index-doc" class="headerlink" title="Delete/Update an index/doc"></a>Delete/Update an index/doc</h3><p>When a document is “deleted,” it is actually just marked as deleted in the .del file. A document that has been marked as deleted can still match a query, but it is removed from the results list before the final query results are returned. Updating is working in a similar way.<br>Regularly, the deleted doc will be purged after the auto segment mergine process.</p>
+<h2 id="Cluster-Inside"><a href="#Cluster-Inside" class="headerlink" title="Cluster Inside"></a>Cluster Inside</h2><h3 id="How-to-find-a-shard"><a href="#How-to-find-a-shard" class="headerlink" title="How to find a shard"></a>How to find a shard</h3><p>When a node gets a query, it will use:<br><code>shard = hash(routing) % number_of_primary_shards</code><br>to find the shard. Routing can be the any string. By default, it is the doc id.</p>
+<h3 id="How-ES-handle-failure"><a href="#How-ES-handle-failure" class="headerlink" title="How ES handle failure"></a>How ES handle failure</h3><p><img src="/images/ElasticSearch5.png" alt=""></p>
 
       
     </div>
@@ -381,7 +342,9 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
           
             <a href="/tags/技术/" rel="tag"># 技术</a>
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/Open-Source/" rel="tag"># Open Source</a>
+          
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
         </div>
       
@@ -394,8 +357,8 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/01/collections/" rel="next" title="Java Collection 源码阅读1">
-                <i class="fa fa-chevron-left"></i> Java Collection 源码阅读1
+              <a href="/2017/07/10/concurrency/" rel="next" title="Java Collection 源码阅读2">
+                <i class="fa fa-chevron-left"></i> Java Collection 源码阅读2
               </a>
             
           </div>
@@ -404,8 +367,8 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/11/20/ElasticSearch/" rel="prev" title="ElasticSearch Inside(1)">
-                ElasticSearch Inside(1) <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/01/books/" rel="prev" title="想读的书单">
+                想读的书单 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -529,7 +492,7 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Happen-before"><span class="nav-number">1.</span> <span class="nav-text">Happen before</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Atomic"><span class="nav-number">2.</span> <span class="nav-text">Atomic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Monitor-Condition"><span class="nav-number">3.</span> <span class="nav-text">Monitor/Condition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock-and-Sync"><span class="nav-number">4.</span> <span class="nav-text">Lock and Sync</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap"><span class="nav-number">5.</span> <span class="nav-text">ConcurrentHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BlockingQueue"><span class="nav-number">6.</span> <span class="nav-text">BlockingQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Thread-State"><span class="nav-number">7.</span> <span class="nav-text">Thread State:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executor"><span class="nav-number">8.</span> <span class="nav-text">Executor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ForkJoinPool"><span class="nav-number">9.</span> <span class="nav-text">ForkJoinPool</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Operations"><span class="nav-number">2.</span> <span class="nav-text">Common Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-an-index"><span class="nav-number">2.1.</span> <span class="nav-text">Add an index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-a-doc"><span class="nav-number">2.2.</span> <span class="nav-text">Add a doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-on-an-index"><span class="nav-number">2.3.</span> <span class="nav-text">Query on an index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete-Update-an-index-doc"><span class="nav-number">2.4.</span> <span class="nav-text">Delete/Update an index/doc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-Inside"><span class="nav-number">3.</span> <span class="nav-text">Cluster Inside</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-find-a-shard"><span class="nav-number">3.1.</span> <span class="nav-text">How to find a shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-ES-handle-failure"><span class="nav-number">3.2.</span> <span class="nav-text">How ES handle failure</span></a></li></ol></li></ol></div>
             
 
           </div>
