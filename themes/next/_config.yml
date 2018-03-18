@@ -803,8 +803,6 @@ vendors:
   # https://github.com/revir/need-more-share2
   needMoreShare2:
 
-language: en
-
 # Assets
 css: css
 js: js
