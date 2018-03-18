@@ -20,6 +20,7 @@ tags:
         
     -   remove()
         
+<!--more-->
 
 - Methods of ListIterator (only for list):
 

@@ -13,7 +13,7 @@ tags:
 Polynomial Curve Fitting:
 
 -   regression, error function, RMS(root-mean-square),overfitting
-
+<!--more-->
 Probability Theory:
 
 -   many distribution.....

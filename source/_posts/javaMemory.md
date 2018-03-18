@@ -11,6 +11,7 @@ tags:
     
 3.  HashTable is synchronized and HashMap is not. Vector (also Stack) is synchronized and ArrayList is not.
     
+<!--more-->
 4.  Overhead of collections:
 ![](/images/javaMemory1.png)
 

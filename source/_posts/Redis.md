@@ -14,7 +14,13 @@ Redis supports lots of data types:
 4. hash (k-v map)
 etc.
 Examples:
-
+```
+redis 127.0.0.1:6379> SET tutorialspoint redis 
+OK 
+redis 127.0.0.1:6379> GET tutorialspoint 
+"redis" 
+```
+<!--more-->
 ## Single Machine Redis
 1. Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:
     * RDB: store the compress the k-v db into disk

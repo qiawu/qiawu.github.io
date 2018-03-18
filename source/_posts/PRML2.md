@@ -16,6 +16,7 @@ Binary Variables:
 -   Bernouli Distribution, binomial distribution
 -   conjugate prior --> beta distribution
 
+<!--more-->
 Multinomial Variables:
 
 -   multinomial distribution

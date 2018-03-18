@@ -16,6 +16,7 @@ ES Cluster:
 1 Node == n shards
 Shard == 1 lucene instance, which contains many segments
 Segment == mini lucene index, multiple segments can be merged into one
+<!--more-->
 ![](/images/ElasticSearch1.png)
 
 Master Node: maintaining the global state of the cluster.

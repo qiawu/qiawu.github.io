@@ -17,6 +17,7 @@ three example: block means independent conditionally
      1. tail-tail, observed(block), unobserved(unblock)
      2. head-tail, observed(block), unobserved(unblock)
      3. head-head, observed(unblock), unobserved(block)
+<!--more-->
 D-separation theorm: regrard graph as filter for distribution p(x)
 Markov blanket/Markov boundary
 Directed graphical model --> Bayesian Networks:

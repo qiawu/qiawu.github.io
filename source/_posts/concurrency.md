@@ -21,6 +21,7 @@ tags:
 2.  ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use "LockSupport.park and unpark" to suspend thread and wakeup thread
     
 
+<!--more-->
 ## Lock and Sync
 
 See [http://www.cnblogs.com/wanly3643/p/3835839.html](http://www.cnblogs.com/wanly3643/p/3835839.html)
