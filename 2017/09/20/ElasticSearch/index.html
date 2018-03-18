@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="技术,Open Source,Redis," />
+  <meta name="keywords" content="技术,Open Source,ElasticSearch," />
 
 
 
@@ -79,18 +79,24 @@
 
 
 
-<meta name="description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
-<meta name="keywords" content="技术,Open Source,Redis">
+<meta name="description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
+<meta name="keywords" content="技术,Open Source,ElasticSearch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis Inside(1)">
-<meta property="og:url" content="http://yoursite.com/2017/12/20/Redis/index.html">
+<meta property="og:title" content="ElasticSearch Inside(1)">
+<meta property="og:url" content="http://yoursite.com/2017/09/20/ElasticSearch/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta property="og:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-18T13:05:43.000Z">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch1.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch2.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch3.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch4.png">
+<meta property="og:image" content="http://yoursite.com/images/ElasticSearch5.png">
+<meta property="og:updated_time" content="2018-03-18T13:17:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis Inside(1)">
-<meta name="twitter:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta name="twitter:title" content="ElasticSearch Inside(1)">
+<meta name="twitter:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
+<meta name="twitter:image" content="http://yoursite.com/images/ElasticSearch1.png">
 
 
 
@@ -120,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/12/20/Redis/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/20/ElasticSearch/"/>
 
 
 
 
 
-  <title>Redis Inside(1) | 抓瓢虫的少年</title>
+  <title>ElasticSearch Inside(1) | 抓瓢虫的少年</title>
   
 
 
@@ -233,7 +239,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/20/Redis/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/ElasticSearch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiawu Cai">
@@ -250,7 +256,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis Inside(1)</h1>
+          <h1 class="post-title" itemprop="name headline">ElasticSearch Inside(1)</h1>
         
 
         <div class="post-meta">
@@ -262,8 +268,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T21:30:43+08:00">
-                2017-12-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T20:30:43+08:00">
+                2017-09-20
               </time>
             
 
@@ -300,34 +306,28 @@
       
 
       
-        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Redis supports lots of data types:</p>
+        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>ES and Relational Database:<br>Elasticsearch Index == Database<br>Types == Tables<br>Properties == Schema</p>
+<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="/images/ElasticSearch1.png" alt=""></p>
+<p>Master Node: maintaining the global state of the cluster.<br>Data-only Node: hold data and handle CRUD operations on data<br>Other nodes: coordinating only, etc.</p>
+<h2 id="Common-Operations"><a href="#Common-Operations" class="headerlink" title="Common Operations"></a>Common Operations</h2><h3 id="Add-an-index"><a href="#Add-an-index" class="headerlink" title="Add an index"></a>Add an index</h3><p><img src="/images/ElasticSearch2.png" alt=""></p>
+<h3 id="Add-a-doc"><a href="#Add-a-doc" class="headerlink" title="Add a doc"></a>Add a doc</h3><p><img src="/images/ElasticSearch3.png" alt=""></p>
 <ol>
-<li>string</li>
-<li>list</li>
-<li>set</li>
-<li>hash (k-v map)<br>etc.<br>Examples:</li>
+<li><p>New documents are collected in an in-memory indexing buffer</p>
+</li>
+<li><p>Every so often, the buffer is commited:</p>
+<ul>
+<li>A new segment—a supplementary inverted index—is written to disk.</li>
+<li>A new commit point is written to disk, which includes the name of the new segment.</li>
+<li>The disk is fsync’ed—all writes waiting in the filesystem cache are flushed to disk, to ensure that they have been physically written.</li>
+</ul>
+</li>
+<li>The new segment is opened, making the documents it contains visible to search.</li>
+<li>The in-memory buffer is cleared, and is ready to accept new documents.</li>
 </ol>
-<h2 id="Single-Machine-Redis"><a href="#Single-Machine-Redis" class="headerlink" title="Single Machine Redis"></a>Single Machine Redis</h2><ol>
-<li>Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:<br>..<em> RDB: store the compress the k-v db into disk<br>..</em> AOF: store change log of cmd</li>
-<li>a single machine redis can operate multiple dbs. (in a distributed mode, a redis can only operate one db)</li>
-<li>server logic:<br>..<em> handle IO event (client request) and time event. It is event driven.<br>..</em> Reactor pattern<br>..* Single thread</li>
-</ol>
-<h2 id="Distributed-Redis"><a href="#Distributed-Redis" class="headerlink" title="Distributed Redis"></a>Distributed Redis</h2><ol>
-<li>Support Master-Slave mode. (Master will sync up its data with slave)</li>
-<li>Use Sentinel will monitor Master health</li>
-<li>Each node in the cluster will maitain the current cluster state: including some health tag, shard-to-slot mapping</li>
-<li>Node(shard): responsible for a number of slots. Each node has only one db<br>..<em> key send to node A<br>..</em> node A check if the key is in its slots<br>..<em> if no, return the target node<br>..</em> if yes, execute the cmd (find the key’s value or insert the k-v into its db)</li>
-</ol>
-<h2 id="Other-features"><a href="#Other-features" class="headerlink" title="Other features"></a>Other features</h2><ol>
-<li>Lua<br>..<em> reduce network cost. We can do multiple cmds in the lua scripts so one request is only needed to do the same<br>..</em> atomic in a lua. No other cmds will be executed in the middle of lua<br>..* we can reuse the lua script in the client any time.</li>
-<li>Pub-Sub<br>..<em> support simple regex pattern match to topics<br>..</em> If subscribers are not online, the message will lost</li>
-</ol>
-<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><ol>
-<li>find top K hot XXXX in a website</li>
-<li>find recent visited records</li>
-<li>sanity check of a request (i.e., if the user id is marched with some fields)</li>
-<li>statistic: i.e., count how many users are registered, how many visited, etc.</li>
-</ol>
+<h3 id="Query-on-an-index"><a href="#Query-on-an-index" class="headerlink" title="Query on an index"></a>Query on an index</h3><p><img src="/images/ElasticSearch4.png" alt=""></p>
+<h3 id="Delete-Update-an-index-doc"><a href="#Delete-Update-an-index-doc" class="headerlink" title="Delete/Update an index/doc"></a>Delete/Update an index/doc</h3><p>When a document is “deleted,” it is actually just marked as deleted in the .del file. A document that has been marked as deleted can still match a query, but it is removed from the results list before the final query results are returned. Updating is working in a similar way.<br>Regularly, the deleted doc will be purged after the auto segment mergine process.</p>
+<h2 id="Cluster-Inside"><a href="#Cluster-Inside" class="headerlink" title="Cluster Inside"></a>Cluster Inside</h2><h3 id="How-to-find-a-shard"><a href="#How-to-find-a-shard" class="headerlink" title="How to find a shard"></a>How to find a shard</h3><p>When a node gets a query, it will use:<br><code>shard = hash(routing) % number_of_primary_shards</code><br>to find the shard. Routing can be the any string. By default, it is the doc id.</p>
+<h3 id="How-ES-handle-failure"><a href="#How-ES-handle-failure" class="headerlink" title="How ES handle failure"></a>How ES handle failure</h3><p><img src="/images/ElasticSearch5.png" alt=""></p>
 
       
     </div>
@@ -349,7 +349,7 @@
           
             <a href="/tags/Open-Source/" rel="tag"># Open Source</a>
           
-            <a href="/tags/Redis/" rel="tag"># Redis</a>
+            <a href="/tags/ElasticSearch/" rel="tag"># ElasticSearch</a>
           
         </div>
       
@@ -362,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/01/books/" rel="next" title="想读的书单">
-                <i class="fa fa-chevron-left"></i> 想读的书单
+              <a href="/2017/07/10/concurrency/" rel="next" title="Java Collection 源码阅读2">
+                <i class="fa fa-chevron-left"></i> Java Collection 源码阅读2
               </a>
             
           </div>
@@ -372,8 +372,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/28/NewZealand/" rel="prev" title="新西兰--一个被上帝眷顾的地方">
-                新西兰--一个被上帝眷顾的地方 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/20/Redis/" rel="prev" title="Redis Inside(1)">
+                Redis Inside(1) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -497,7 +497,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Machine-Redis"><span class="nav-number">2.</span> <span class="nav-text">Single Machine Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-Redis"><span class="nav-number">3.</span> <span class="nav-text">Distributed Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-features"><span class="nav-number">4.</span> <span class="nav-text">Other features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-cases"><span class="nav-number">5.</span> <span class="nav-text">Use cases</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Common-Operations"><span class="nav-number">2.</span> <span class="nav-text">Common Operations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-an-index"><span class="nav-number">2.1.</span> <span class="nav-text">Add an index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-a-doc"><span class="nav-number">2.2.</span> <span class="nav-text">Add a doc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query-on-an-index"><span class="nav-number">2.3.</span> <span class="nav-text">Query on an index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete-Update-an-index-doc"><span class="nav-number">2.4.</span> <span class="nav-text">Delete/Update an index/doc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cluster-Inside"><span class="nav-number">3.</span> <span class="nav-text">Cluster Inside</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-find-a-shard"><span class="nav-number">3.1.</span> <span class="nav-text">How to find a shard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-ES-handle-failure"><span class="nav-number">3.2.</span> <span class="nav-text">How ES handle failure</span></a></li></ol></li></ol></div>
             
 
           </div>
