@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta name="description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
 <meta name="keywords" content="技术,Open Source,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis Inside(1)">
 <meta property="og:url" content="http://yoursite.com/2017/10/20/Redis/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta property="og:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-18T13:16:16.000Z">
+<meta property="og:updated_time" content="2018-03-18T13:40:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis Inside(1)">
-<meta name="twitter:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:  Single Machine Redis Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it als">
+<meta name="twitter:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
 
 
 
@@ -305,8 +305,10 @@
 <li>string</li>
 <li>list</li>
 <li>set</li>
-<li>hash (k-v map)<br>etc.<br>Examples:</li>
+<li>hash (k-v map)<br>etc.<br>Examples:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET tutorialspoint redis </span><br><span class="line">OK </span><br><span class="line">redis 127.0.0.1:6379&gt; GET tutorialspoint </span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
+<a id="more"></a>
 <h2 id="Single-Machine-Redis"><a href="#Single-Machine-Redis" class="headerlink" title="Single Machine Redis"></a>Single Machine Redis</h2><ol>
 <li>Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:<ul>
 <li>RDB: store the compress the k-v db into disk</li>

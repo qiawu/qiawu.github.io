@@ -299,7 +299,8 @@
 
       
         
-          <p>刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。<br>
+          <p>刚刚结束了为期两周的新西兰之旅，写点日记记录一下一些感想吧。</p>
+<h2 id="Auckland"><a href="#Auckland" class="headerlink" title="Auckland"></a>Auckland</h2><p>第一天我们坐飞机来到了奥克兰，调时差真的好累，整个人不知道是醒着还是睡着，总之没精神。因为到的时间是早上，还没法入住酒店，没地方休息，我们找了一家汉堡店，吃了顿早午餐，然后躺在人家沙发上睡了进两个小时，醒来还是浑浑噩噩。。。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/12/28/NewZealand/#more" rel="contents">
@@ -544,61 +545,21 @@
 
       
         
-          
-            <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Redis supports lots of data types:</p>
+          <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Redis supports lots of data types:</p>
 <ol>
 <li>string</li>
 <li>list</li>
 <li>set</li>
-<li>hash (k-v map)<br>etc.<br>Examples:</li>
-</ol>
-<h2 id="Single-Machine-Redis"><a href="#Single-Machine-Redis" class="headerlink" title="Single Machine Redis"></a>Single Machine Redis</h2><ol>
-<li>Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:<ul>
-<li>RDB: store the compress the k-v db into disk</li>
-<li>AOF: store change log of cmd</li>
-</ul>
-</li>
-<li>a single machine redis can operate multiple dbs. (in a distributed mode, a redis can only operate one db)</li>
-<li>server logic:<ul>
-<li>handle IO event (client request) and time event. It is event driven.</li>
-<li>Reactor pattern</li>
-<li>Single thread</li>
-</ul>
+<li>hash (k-v map)<br>etc.<br>Examples:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET tutorialspoint redis </span><br><span class="line">OK </span><br><span class="line">redis 127.0.0.1:6379&gt; GET tutorialspoint </span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="Distributed-Redis"><a href="#Distributed-Redis" class="headerlink" title="Distributed Redis"></a>Distributed Redis</h2><ol>
-<li>Support Master-Slave mode. (Master will sync up its data with slave)</li>
-<li>Use Sentinel will monitor Master health</li>
-<li>Each node in the cluster will maitain the current cluster state: including some health tag, shard-to-slot mapping</li>
-<li>Node(shard): responsible for a number of slots. Each node has only one db<ul>
-<li>key send to node A</li>
-<li>node A check if the key is in its slots</li>
-<li>if no, return the target node</li>
-<li>if yes, execute the cmd (find the key’s value or insert the k-v into its db)</li>
-</ul>
-</li>
-</ol>
-<h2 id="Other-features"><a href="#Other-features" class="headerlink" title="Other features"></a>Other features</h2><ol>
-<li>Lua<ul>
-<li>reduce network cost. We can do multiple cmds in the lua scripts so one request is only needed to do the same</li>
-<li>atomic in a lua. No other cmds will be executed in the middle of lua</li>
-<li>we can reuse the lua script in the client any time.</li>
-</ul>
-</li>
-<li>Pub-Sub<ul>
-<li>support simple regex pattern match to topics</li>
-<li>If subscribers are not online, the message will lost</li>
-</ul>
-</li>
-</ol>
-<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><ol>
-<li>find top K hot XXXX in a website</li>
-<li>find recent visited records</li>
-<li>sanity check of a request (i.e., if the user id is marched with some fields)</li>
-<li>statistic: i.e., count how many users are registered, how many visited, etc.</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/20/Redis/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -715,31 +676,15 @@
 
       
         
-          
-            <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>ES and Relational Database:<br>Elasticsearch Index == Database<br>Types == Tables<br>Properties == Schema</p>
-<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="//images/ElasticSearch1.png" alt=""></p>
-<p>Master Node: maintaining the global state of the cluster.<br>Data-only Node: hold data and handle CRUD operations on data<br>Other nodes: coordinating only, etc.</p>
-<h2 id="Common-Operations"><a href="#Common-Operations" class="headerlink" title="Common Operations"></a>Common Operations</h2><h3 id="Add-an-index"><a href="#Add-an-index" class="headerlink" title="Add an index"></a>Add an index</h3><p><img src="//images/ElasticSearch2.png" alt=""></p>
-<h3 id="Add-a-doc"><a href="#Add-a-doc" class="headerlink" title="Add a doc"></a>Add a doc</h3><p><img src="//images/ElasticSearch3.png" alt=""></p>
-<ol>
-<li><p>New documents are collected in an in-memory indexing buffer</p>
-</li>
-<li><p>Every so often, the buffer is commited:</p>
-<ul>
-<li>A new segment—a supplementary inverted index—is written to disk.</li>
-<li>A new commit point is written to disk, which includes the name of the new segment.</li>
-<li>The disk is fsync’ed—all writes waiting in the filesystem cache are flushed to disk, to ensure that they have been physically written.</li>
-</ul>
-</li>
-<li>The new segment is opened, making the documents it contains visible to search.</li>
-<li>The in-memory buffer is cleared, and is ready to accept new documents.</li>
-</ol>
-<h3 id="Query-on-an-index"><a href="#Query-on-an-index" class="headerlink" title="Query on an index"></a>Query on an index</h3><p><img src="//images/ElasticSearch4.png" alt=""></p>
-<h3 id="Delete-Update-an-index-doc"><a href="#Delete-Update-an-index-doc" class="headerlink" title="Delete/Update an index/doc"></a>Delete/Update an index/doc</h3><p>When a document is “deleted,” it is actually just marked as deleted in the .del file. A document that has been marked as deleted can still match a query, but it is removed from the results list before the final query results are returned. Updating is working in a similar way.<br>Regularly, the deleted doc will be purged after the auto segment mergine process.</p>
-<h2 id="Cluster-Inside"><a href="#Cluster-Inside" class="headerlink" title="Cluster Inside"></a>Cluster Inside</h2><h3 id="How-to-find-a-shard"><a href="#How-to-find-a-shard" class="headerlink" title="How to find a shard"></a>How to find a shard</h3><p>When a node gets a query, it will use:<br><code>shard = hash(routing) % number_of_primary_shards</code><br>to find the shard. Routing can be the any string. By default, it is the doc id.</p>
-<h3 id="How-ES-handle-failure"><a href="#How-ES-handle-failure" class="headerlink" title="How ES handle failure"></a>How ES handle failure</h3><p><img src="//images/ElasticSearch5.png" alt=""></p>
-
-          
+          <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>ES and Relational Database:<br>Elasticsearch Index == Database<br>Types == Tables<br>Properties == Schema</p>
+<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="//images/ElasticSearch1.png" alt=""><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/09/20/ElasticSearch/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -856,8 +801,7 @@
 
       
         
-          
-            <h2 id="Happen-before"><a href="#Happen-before" class="headerlink" title="Happen before"></a>Happen before</h2><p><a href="https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility" target="_blank" rel="noopener">https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility</a></p>
+          <h2 id="Happen-before"><a href="#Happen-before" class="headerlink" title="Happen before"></a>Happen before</h2><p><a href="https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility" target="_blank" rel="noopener">https://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility</a></p>
 <h2 id="Atomic"><a href="#Atomic" class="headerlink" title="Atomic"></a>Atomic</h2><p><a href="http://www.jianshu.com/p/0f1b4ae625e5" target="_blank" rel="noopener">http://www.jianshu.com/p/0f1b4ae625e5</a></p>
 <h2 id="Monitor-Condition"><a href="#Monitor-Condition" class="headerlink" title="Monitor/Condition"></a>Monitor/Condition</h2><ol>
 <li><p>Object, wait, notify, notifiyAll (the last two must be called when we get the object lock)</p>
@@ -865,60 +809,13 @@
 <li><p>ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use “LockSupport.park and unpark” to suspend thread and wakeup thread</p>
 </li>
 </ol>
-<h2 id="Lock-and-Sync"><a href="#Lock-and-Sync" class="headerlink" title="Lock and Sync"></a>Lock and Sync</h2><p>See <a href="http://www.cnblogs.com/wanly3643/p/3835839.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/p/3835839.html</a></p>
-<p>Lock —-&gt;  AbstractQueuedSynchronizer —&gt; setState to communicate between threads, put waiting threads to a waiting list, use park to suspend threads and unpark to wake up threads</p>
-<p>ReentrantLock —-> Sync/FairSync/NonFairSync</p>
-<p>ReentrantReadWriteLock —> ReadLock/WriteLock, Sync/FairSync/NonFairSync</p>
-<p>Semphore –> Sync/FairSync/NonFairSync, allow limit number of share locking</p>
-<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p><a href="http://www.cnblogs.com/wanly3643/category/437878.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/category/437878.html</a></p>
-<ol>
-<li><p>Use volatile</p>
-</li>
-<li><p>Sync only in one bucket</p>
-</li>
-</ol>
-<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><ol>
-<li><p>They are using ReentrantLock and Condition to do syncing</p>
-</li>
-<li><p>BlockingQueue use lock and condition to implement the consumer and producer scenario</p>
-</li>
-<li><p>ArrayBlockingQueue needs one lock while LInkedBlockingQueue needs two</p>
-</li>
-<li><p>See notes in “Collection and Map” for all BlockingQueue classes</p>
-</li>
-</ol>
-<h2 id="Thread-State"><a href="#Thread-State" class="headerlink" title="Thread State:"></a>Thread State:</h2><p><a href="https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/" target="_blank" rel="noopener">https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/</a></p>
-<h2 id="Executor"><a href="#Executor" class="headerlink" title="Executor"></a>Executor</h2><p><img src="/images/concurrency.png" alt=""></p>
-<ol>
-<li>How ThreadPoolExecutor controls the threads:</li>
-</ol>
-<p><a href="http://www.jianshu.com/p/65da61177eed" target="_blank" rel="noopener">http://www.jianshu.com/p/65da61177eed</a></p>
-<pre><code>Submit process:
-
-Submit(Runnable) ---&gt; execute(FutureTask(runnable)) --&gt; threadpool call runWorkers() --&gt; FutureTask.run --\&gt; FutureTask.finish --\&gt; unpark(waiting client threads) --&gt; worker thread continue to take task from workQueue
-
-ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread), waiting to be unparked by FutureTask.finish
-</code></pre><ol>
-<li><p>How ScheduledThreadPoolExecutor works:</p>
-<p>Same as ThreadPoolExecutor, but use a DelayWorkQueue as workQueue, which as deplay polling task.</p>
-<p>DelayWorkQueue contains ScheduleFutureTask, which is a FutureTask that will can check the delayTime before each run and add itself back to workQueue if it is set to repeatly run.</p>
-<p>DelayWorkQueue is actually similar to PriorityQueue, which maintains a binary heap, which compare by each element’s delay time.</p>
-</li>
-</ol>
-<h2 id="ForkJoinPool"><a href="#ForkJoinPool" class="headerlink" title="ForkJoinPool"></a>ForkJoinPool</h2><p>See <a href="http://www.bijishequ.com/detail/520567?p=37" target="_blank" rel="noopener">http://www.bijishequ.com/detail/520567?p=37</a> for implementation detail</p>
-<p>Some tips:</p>
-<ol>
-<li><p>The pool maintains an array of WorkQueue</p>
-</li>
-<li><p>Each workQueue contains a ForkJoinThread, which is actually a thread can run to steal jobs and run its own taskQueue</p>
-</li>
-<li><p>Each taskQueue is an array of ForkJoinTask, which is a FutureTask</p>
-</li>
-<li><p>Each ForkJoinThread will get its own job from its queue using FILO, but steal job from other thread’s queue using FIFO</p>
-</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/10/concurrency/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1035,8 +932,7 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
       
         
-          
-            <h2 id="How-fast-fail-happened-in-non-synced-collections"><a href="#How-fast-fail-happened-in-non-synced-collections" class="headerlink" title="How fast-fail happened in non-synced collections"></a>How fast-fail happened in non-synced collections</h2><p>(why modCount is not volatile: <a href="http://www.jianshu.com/p/d9ee4b075d5a" target="_blank" rel="noopener">http://www.jianshu.com/p/d9ee4b075d5a</a> )</p>
+          <h2 id="How-fast-fail-happened-in-non-synced-collections"><a href="#How-fast-fail-happened-in-non-synced-collections" class="headerlink" title="How fast-fail happened in non-synced collections"></a>How fast-fail happened in non-synced collections</h2><p>(why modCount is not volatile: <a href="http://www.jianshu.com/p/d9ee4b075d5a" target="_blank" rel="noopener">http://www.jianshu.com/p/d9ee4b075d5a</a> )</p>
 <h2 id="Differences-between-Iterator-and-ListIterator"><a href="#Differences-between-Iterator-and-ListIterator" class="headerlink" title="Differences between Iterator and ListIterator"></a>Differences between Iterator and ListIterator</h2><ul>
 <li><p>Methods of Iterator (for list and set):</p>
 <ul>
@@ -1049,68 +945,13 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 </ul>
 </li>
 </ul>
-<ul>
-<li><p>Methods of ListIterator (only for list):</p>
-<ul>
-<li><p>add(E e)</p>
-</li>
-<li><p>hasNext()</p>
-</li>
-<li><p>hasPrevious()</p>
-</li>
-<li><p>next()</p>
-</li>
-<li><p>nextIndex()</p>
-</li>
-<li><p>previous()</p>
-</li>
-<li><p>previousIndex()</p>
-</li>
-<li><p>remove()</p>
-</li>
-<li><p>set(E e)</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="ReentrantLock-and-synchronized"><a href="#ReentrantLock-and-synchronized" class="headerlink" title="ReentrantLock and synchronized"></a>ReentrantLock and synchronized</h2><p>ReentrantLock has bettern performance and can cross method.</p>
-<p>But synchronized is simple. So use it unless it is proven to be a problem.</p>
-<h2 id="Enumeration-and-Iterator"><a href="#Enumeration-and-Iterator" class="headerlink" title="Enumeration and Iterator"></a>Enumeration and Iterator</h2><p>Enumeration is faster than Iterator since Iterator may check fast fail while Enumeration don’t. Iterator also support modification. Enumeration is usually used in synced collection.</p>
-<h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><ul>
-<li><p>Non-blocking</p>
-<ul>
-<li><p>Dequeue (LinkedList and ArrayDeque are its children)</p>
-</li>
-<li><p>PriorityQueue (maintains a binary heap)</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Blocking (see notes on Concurrency)</p>
-<ul>
-<li><p>ArrayBlockingQueue</p>
-</li>
-<li><p>LinkedBlockingQueue</p>
-</li>
-<li><p>PriorityBlockingQueue</p>
-</li>
-<li><p>DelayedWorkQueue (in ScheduledThreadExecutor, this is actually also a binary heap)</p>
-</li>
-<li><p>DelayQueue (very similar to DeplayedWordQueue)</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>HastSet 和 TreeSet  是Set的两个实现类。<br>HashSet依赖于HashMap，它实际上是通过HashMap实现的。HashSet中的元素是无序的。<br>TreeSet依赖于TreeMap，它实际上是通过TreeMap实现的。TreeSet中的元素是有序的。</p>
-<h2 id="Synchronized-collections"><a href="#Synchronized-collections" class="headerlink" title="Synchronized collections"></a>Synchronized collections</h2><p>CopyOnWriteArrayList</p>
-<p>Vector/Stack</p>
-<p>HashTable</p>
-<p>ConcurrentHashMap</p>
-<p>Collections.synchronizedXXX()</p>
-<h2 id="Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap"><a href="#Difference-between-HashTable-ConcurrentHashMap-and-Collections-synchronizedMap" class="headerlink" title="Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap"></a>Difference between HashTable, ConcurrentHashMap and Collections.synchronizedMap</h2><p><img src="/images/collection.png" alt=""><br>The “scalability issues” for Hashtable are present in exactly the same way in Collections.synchronizedMap(Map) - they use very simple synchronization, which means that only one thread can access the map at the same time.</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/01/collections/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1227,25 +1068,21 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
       
         
-          
-            <ol>
+          <ol>
 <li><p>Integer contains meta data, not only the int value. The size is usually 4 times of int. An array is bigger since it needs to store the length</p>
 </li>
 <li><p>HashSet is a wrapper of HashMap. An empty HashSet/HashMap already contains 16 objects (default size) and the size is more 100 bytes. Everytime we do “put”, it will create new object “Entry”.</p>
 </li>
 <li><p>HashTable is synchronized and HashMap is not. Vector (also Stack) is synchronized and ArrayList is not.</p>
 </li>
-<li><p>Overhead of collections:<br><img src="/images/javaMemory1.png" alt=""></p>
-</li>
-<li><p>Java application memory<br><img src="/images/javaMemory2.png" alt=""></p>
-</li>
-<li><p>Compressed reference/compressed OOPs could reduce java heap usage when migrate from 32 bit to 64 bit platform. But it doesn’t do the same for java native heap</p>
-</li>
-<li><p>How heap and stack work together:<br><img src="/images/javaMemory3.png" alt=""></p>
-</li>
 </ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/01/javaMemory/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1362,12 +1199,15 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
       
         
-          
-            <p>完美解释了如何从零开始写编译器<br><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">https://ruslanspivak.com/lsbasi-part1/</a> </p>
+          <p>完美解释了如何从零开始写编译器<br><a href="https://ruslanspivak.com/lsbasi-part1/" target="_blank" rel="noopener">https://ruslanspivak.com/lsbasi-part1/</a> </p>
 <p>example:<br>Parsing<br>7 + 3 * (10 / (12 / (3 + 1) - 1)) </p>
-<p><img src="/images/compiler1.png" alt=""><br><img src="/images/compiler2.png" alt=""><br><img src="/images/compiler3.png" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/01/compiler/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1484,46 +1324,19 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
       
         
-          
-            <p>开始阅读git权威指南</p>
+          <p>开始阅读git权威指南</p>
 <p>第一章：</p>
 <p>1、diff和patch的联合使用</p>
 <p>2、cvs -&gt; svn -&gt; git</p>
 <p>第二章和第三章：</p>
 <p>废话太多，过</p>
-<p>第四章：</p>
-<p>命令：</p>
-<p>git –version</p>
-<p>git config 和 git config–global 和 git config –system 三种命令</p>
-<p>git init 初始化当前目录，生成 .git目录，即版本库（此目录只在根目录下有）</p>
-<p>git add 和 git commit （这两个命令常用，可以设置别名）</p>
-<p>第五章：</p>
-<p>概念：</p>
-<p>git 暂存区（stage）</p>
-<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc5Cvs6ab6" target="_blank" rel="noopener"><img src="http://s7.sinaimg.cn/mw690/001hbb8fgy6Gc5Cvs6ab6&amp;690" alt=""></a>  </p>
-<p>注：左侧是工作区，右侧是.git目录下的所有东西，其中index就是所谓的暂存区，objects是实体对象库，HEAD是master所在分支</p>
-<p>注：add 命令之后会把工作区的内容存到暂存区，commit命令之后才会把暂存区的内容存到master分支中</p>
-<p>命令：</p>
-<p>git diff（工作区和暂存区比较） 和 git diff –cached（暂存区和HEAD比较）和 git diff HEAD（工作区和HEAD比较）</p>
-<p>git status 的输出（加 -s 选择可以得到简略的输出，记住其中第一个M和第二个M的意义）</p>
-<p>第六章、第七章和第八章：</p>
-<p>概念：</p>
-<p>对象ID（40位十六进制的SHA1哈希值）</p>
-<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc6fCnH5cb" target="_blank" rel="noopener"><img src="http://s12.sinaimg.cn/mw690/001hbb8fgy6Gc6fCnH5cb&amp;690" alt=""></a>  </p>
-<p><a href="http://blog.photo.sina.com.cn/showpic.html#url=http://album.sina.com.cn/pic/001hbb8fgy6Gc6sLKxi50" target="_blank" rel="noopener"><img src="http://s1.sinaimg.cn/mw690/001hbb8fgy6Gc6sLKxi50&amp;690" alt=""></a>  </p>
-<p>命令：</p>
-<p>git branch 查看当前所在的分支</p>
-<p>git log 可以查看提交的记录（常用的选项包括 –graph 和 –oneline）</p>
-<p>git log -l HEAD/master 可以查看HEAD或者master指向的commit结构</p>
-<p>git rev-parse HEAD/master 可以得到他们的对象ID</p>
-<p>linux 命令中的 sha1sum</p>
-<p>git reset 可以重新设置master分支到任意一个commit（如 HEAD^，即HEAD的上一个commit）</p>
-<p>reflog可以用来记录改变的分支操作，以防止误操作导致指针指向无法找回</p>
-<p>git checkout可以重置 HEAD指针</p>
-<p>git merge + 对象ID 可以把某个commit 合并到master分支中</p>
-<p>（git reset 和 git checkout 两个命令的详细用法见原书第七和第八章）</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/05/03/git/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1640,25 +1453,18 @@ ClientThread --\&gt; FutureTask.get --&gt; awaitDone --\&gt; park(client thread)
 
       
         
-          
-            <p>继续啃PRML<br>第八章：<br>Basic notation:<br>node –&gt; random variable or group of random variables<br>link –&gt; probabilistic relation ship<br>notation of random var and non-random var, observed and unobserved var<br>Conditional Independence:<br>three example: block means independent conditionally</p>
+          <p>继续啃PRML<br>第八章：<br>Basic notation:<br>node –&gt; random variable or group of random variables<br>link –&gt; probabilistic relation ship<br>notation of random var and non-random var, observed and unobserved var<br>Conditional Independence:<br>three example: block means independent conditionally</p>
 <pre><code>1. tail-tail, observed(block), unobserved(unblock)
 2. head-tail, observed(block), unobserved(unblock)
 3. head-head, observed(unblock), unobserved(block)
-</code></pre><p>D-separation theorm: regrard graph as filter for distribution p(x)<br>Markov blanket/Markov boundary<br>Directed graphical model –&gt; Bayesian Networks:<br>Discrete variables: three ways to control number of parameters</p>
-<pre><code>1. chain nodes
-2. sharing parameters
-3. model with latent parameter
-</code></pre><p>Continues variables: Linear-Gaussian model<br>Undirected graphical model –&gt; Markov random field：<br>conditional independence property in undirected graph<br>factorization property in directed graph<br>potential function and energy function<br>how to convert directed graph to undirected and vice versa<br>I map, D map, perfect map<br>Inference:<br>chain: using potential function, local messages pass to get an efficient algorithm<br>trees: undirected tree, directed tree, polytree, use efficient algorithm in a broader situation<br>factor graph:<br>translate directed and undirected graph to factor graph to become tree<br>sum-product algorithm: read it later<br>max-sum algorithm: read it later</p>
-<p>important view:</p>
-<ol>
-<li>Basic notation</li>
-<li>Conditional property and factorization property</li>
-<li>Directed graphical model –&gt; Bayesian Networks, Undirected graphical model –&gt; Markov random field</li>
-<li>Inference in graphical model</li>
-</ol>
-
-          
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2014/02/03/PRML3/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

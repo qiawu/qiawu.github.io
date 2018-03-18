@@ -88,7 +88,7 @@
 <meta property="og:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/concurrency.png">
-<meta property="og:updated_time" content="2018-03-18T09:22:21.000Z">
+<meta property="og:updated_time" content="2018-03-18T13:40:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Collection 源码阅读2">
 <meta name="twitter:description" content="Happen beforehttps://stackoverflow.com/questions/14329064/synchronized-and-the-scope-of-visibility Atomichttp://www.jianshu.com/p/0f1b4ae625e5 Monitor/Condition Object, wait, notify, notifiyAll (the l">
@@ -310,6 +310,7 @@
 <li><p>ReentranceLock, Condition (the later one must be called when we get the reentrance lock). The condition use “LockSupport.park and unpark” to suspend thread and wakeup thread</p>
 </li>
 </ol>
+<a id="more"></a>
 <h2 id="Lock-and-Sync"><a href="#Lock-and-Sync" class="headerlink" title="Lock and Sync"></a>Lock and Sync</h2><p>See <a href="http://www.cnblogs.com/wanly3643/p/3835839.html" target="_blank" rel="noopener">http://www.cnblogs.com/wanly3643/p/3835839.html</a></p>
 <p>Lock —-&gt;  AbstractQueuedSynchronizer —&gt; setState to communicate between threads, put waiting threads to a waiting list, use park to suspend threads and unpark to wake up threads</p>
 <p>ReentrantLock —-> Sync/FairSync/NonFairSync</p>
