@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="抓瓢虫的少年">
 <meta property="og:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/ElasticSearch1.png">
-<meta property="og:image" content="http://yoursite.com/images/ElasticSearch2.png">
-<meta property="og:image" content="http://yoursite.com/images/ElasticSearch3.png">
-<meta property="og:image" content="http://yoursite.com/images/ElasticSearch4.png">
-<meta property="og:image" content="http://yoursite.com/images/ElasticSearch5.png">
-<meta property="og:updated_time" content="2018-03-18T13:17:13.000Z">
+<meta property="og:image" content="http://images/ElasticSearch1.png">
+<meta property="og:image" content="http://images/ElasticSearch2.png">
+<meta property="og:image" content="http://images/ElasticSearch3.png">
+<meta property="og:image" content="http://images/ElasticSearch4.png">
+<meta property="og:image" content="http://images/ElasticSearch5.png">
+<meta property="og:updated_time" content="2018-03-18T13:28:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch Inside(1)">
 <meta name="twitter:description" content="BasicES and Relational Database:Elasticsearch Index == DatabaseTypes == TablesProperties == Schema ES Cluster:1 Node == n shardsShard == 1 lucene instance, which contains many segmentsSegment == mini">
-<meta name="twitter:image" content="http://yoursite.com/images/ElasticSearch1.png">
+<meta name="twitter:image" content="http://images/ElasticSearch1.png">
 
 
 
@@ -307,10 +307,10 @@
 
       
         <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>ES and Relational Database:<br>Elasticsearch Index == Database<br>Types == Tables<br>Properties == Schema</p>
-<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="/images/ElasticSearch1.png" alt=""></p>
+<p>ES Cluster:<br>1 Node == n shards<br>Shard == 1 lucene instance, which contains many segments<br>Segment == mini lucene index, multiple segments can be merged into one<br><img src="//images/ElasticSearch1.png" alt=""></p>
 <p>Master Node: maintaining the global state of the cluster.<br>Data-only Node: hold data and handle CRUD operations on data<br>Other nodes: coordinating only, etc.</p>
-<h2 id="Common-Operations"><a href="#Common-Operations" class="headerlink" title="Common Operations"></a>Common Operations</h2><h3 id="Add-an-index"><a href="#Add-an-index" class="headerlink" title="Add an index"></a>Add an index</h3><p><img src="/images/ElasticSearch2.png" alt=""></p>
-<h3 id="Add-a-doc"><a href="#Add-a-doc" class="headerlink" title="Add a doc"></a>Add a doc</h3><p><img src="/images/ElasticSearch3.png" alt=""></p>
+<h2 id="Common-Operations"><a href="#Common-Operations" class="headerlink" title="Common Operations"></a>Common Operations</h2><h3 id="Add-an-index"><a href="#Add-an-index" class="headerlink" title="Add an index"></a>Add an index</h3><p><img src="//images/ElasticSearch2.png" alt=""></p>
+<h3 id="Add-a-doc"><a href="#Add-a-doc" class="headerlink" title="Add a doc"></a>Add a doc</h3><p><img src="//images/ElasticSearch3.png" alt=""></p>
 <ol>
 <li><p>New documents are collected in an in-memory indexing buffer</p>
 </li>
@@ -324,10 +324,10 @@
 <li>The new segment is opened, making the documents it contains visible to search.</li>
 <li>The in-memory buffer is cleared, and is ready to accept new documents.</li>
 </ol>
-<h3 id="Query-on-an-index"><a href="#Query-on-an-index" class="headerlink" title="Query on an index"></a>Query on an index</h3><p><img src="/images/ElasticSearch4.png" alt=""></p>
+<h3 id="Query-on-an-index"><a href="#Query-on-an-index" class="headerlink" title="Query on an index"></a>Query on an index</h3><p><img src="//images/ElasticSearch4.png" alt=""></p>
 <h3 id="Delete-Update-an-index-doc"><a href="#Delete-Update-an-index-doc" class="headerlink" title="Delete/Update an index/doc"></a>Delete/Update an index/doc</h3><p>When a document is “deleted,” it is actually just marked as deleted in the .del file. A document that has been marked as deleted can still match a query, but it is removed from the results list before the final query results are returned. Updating is working in a similar way.<br>Regularly, the deleted doc will be purged after the auto segment mergine process.</p>
 <h2 id="Cluster-Inside"><a href="#Cluster-Inside" class="headerlink" title="Cluster Inside"></a>Cluster Inside</h2><h3 id="How-to-find-a-shard"><a href="#How-to-find-a-shard" class="headerlink" title="How to find a shard"></a>How to find a shard</h3><p>When a node gets a query, it will use:<br><code>shard = hash(routing) % number_of_primary_shards</code><br>to find the shard. Routing can be the any string. By default, it is the doc id.</p>
-<h3 id="How-ES-handle-failure"><a href="#How-ES-handle-failure" class="headerlink" title="How ES handle failure"></a>How ES handle failure</h3><p><img src="/images/ElasticSearch5.png" alt=""></p>
+<h3 id="How-ES-handle-failure"><a href="#How-ES-handle-failure" class="headerlink" title="How ES handle failure"></a>How ES handle failure</h3><p><img src="//images/ElasticSearch5.png" alt=""></p>
 
       
     </div>
