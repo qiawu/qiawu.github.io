@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="技术,Open Source,Redis," />
+  <meta name="keywords" content="生活," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
-<meta name="keywords" content="技术,Open Source,Redis">
+<meta name="description" content="好久没写日记了，今天想起来写是因为一件让我很痛心的事，我的一个表弟因为癌症去世了。小时候经常一起玩，特别喜欢跟他开玩笑，一个非常善良呆萌的小男孩，但是自从我出来工作之后，我已经有很长一段时间没有见过他了，去年他得了癌症，医生告知他只有一年的时间，我得知后，心里一直堵着，他一直在坚持着，但是最后这一天还是到来了。上一次我遇到这种事情还是小时候爷爷去世，那时候不懂，印象也不深了。但是这次我的心却久久不">
+<meta name="keywords" content="生活">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis Inside(1)">
-<meta property="og:url" content="http://yoursite.com/2017/10/20/Redis/index.html">
+<meta property="og:title" content="珍惜">
+<meta property="og:url" content="http://yoursite.com/2019/04/21/cherish/index.html">
 <meta property="og:site_name" content="抓瓢虫的少年">
-<meta property="og:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
+<meta property="og:description" content="好久没写日记了，今天想起来写是因为一件让我很痛心的事，我的一个表弟因为癌症去世了。小时候经常一起玩，特别喜欢跟他开玩笑，一个非常善良呆萌的小男孩，但是自从我出来工作之后，我已经有很长一段时间没有见过他了，去年他得了癌症，医生告知他只有一年的时间，我得知后，心里一直堵着，他一直在坚持着，但是最后这一天还是到来了。上一次我遇到这种事情还是小时候爷爷去世，那时候不懂，印象也不深了。但是这次我的心却久久不">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-18T13:40:06.000Z">
+<meta property="og:image" content="http://yoursite.com/images/cherish.jpeg">
+<meta property="og:updated_time" content="2019-04-23T16:28:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis Inside(1)">
-<meta name="twitter:description" content="BasicRedis supports lots of data types:  string list set hash (k-v map)etc.Examples:1234redis 127.0.0.1:6379&amp;gt; SET tutorialspoint redis OK redis 127.0.0.1:6379&amp;gt; GET tutorialspoint &amp;quot;redis&amp;quo">
+<meta name="twitter:title" content="珍惜">
+<meta name="twitter:description" content="好久没写日记了，今天想起来写是因为一件让我很痛心的事，我的一个表弟因为癌症去世了。小时候经常一起玩，特别喜欢跟他开玩笑，一个非常善良呆萌的小男孩，但是自从我出来工作之后，我已经有很长一段时间没有见过他了，去年他得了癌症，医生告知他只有一年的时间，我得知后，心里一直堵着，他一直在坚持着，但是最后这一天还是到来了。上一次我遇到这种事情还是小时候爷爷去世，那时候不懂，印象也不深了。但是这次我的心却久久不">
+<meta name="twitter:image" content="http://yoursite.com/images/cherish.jpeg">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/20/Redis/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/21/cherish/"/>
 
 
 
 
 
-  <title>Redis Inside(1) | 抓瓢虫的少年</title>
+  <title>珍惜 | 抓瓢虫的少年</title>
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/20/Redis/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/21/cherish/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiawu Cai">
@@ -260,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Redis Inside(1)</h1>
+          <h1 class="post-title" itemprop="name headline">珍惜</h1>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-20T21:30:43+08:00">
-                2017-10-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-21T23:14:16+08:00">
+                2019-04-21
               </time>
             
 
@@ -310,60 +312,7 @@
       
 
       
-        <h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>Redis supports lots of data types:</p>
-<ol>
-<li>string</li>
-<li>list</li>
-<li>set</li>
-<li>hash (k-v map)<br>etc.<br>Examples:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; SET tutorialspoint redis </span><br><span class="line">OK </span><br><span class="line">redis 127.0.0.1:6379&gt; GET tutorialspoint </span><br><span class="line">&quot;redis&quot;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<a id="more"></a>
-<h2 id="Single-Machine-Redis"><a href="#Single-Machine-Redis" class="headerlink" title="Single Machine Redis"></a>Single Machine Redis</h2><ol>
-<li>Redis keeps a key-value db structure internally. Normally, it is stored in memory. But it also has persistence strategy:<ul>
-<li>RDB: store the compress the k-v db into disk</li>
-<li>AOF: store change log of cmd</li>
-</ul>
-</li>
-<li>a single machine redis can operate multiple dbs. (in a distributed mode, a redis can only operate one db)</li>
-<li>server logic:<ul>
-<li>handle IO event (client request) and time event. It is event driven.</li>
-<li>Reactor pattern</li>
-<li>Single thread</li>
-</ul>
-</li>
-</ol>
-<h2 id="Distributed-Redis"><a href="#Distributed-Redis" class="headerlink" title="Distributed Redis"></a>Distributed Redis</h2><ol>
-<li>Support Master-Slave mode. (Master will sync up its data with slave)</li>
-<li>Use Sentinel will monitor Master health</li>
-<li>Each node in the cluster will maitain the current cluster state: including some health tag, shard-to-slot mapping</li>
-<li>Node(shard): responsible for a number of slots. Each node has only one db<ul>
-<li>key send to node A</li>
-<li>node A check if the key is in its slots</li>
-<li>if no, return the target node</li>
-<li>if yes, execute the cmd (find the key’s value or insert the k-v into its db)</li>
-</ul>
-</li>
-</ol>
-<h2 id="Other-features"><a href="#Other-features" class="headerlink" title="Other features"></a>Other features</h2><ol>
-<li>Lua<ul>
-<li>reduce network cost. We can do multiple cmds in the lua scripts so one request is only needed to do the same</li>
-<li>atomic in a lua. No other cmds will be executed in the middle of lua</li>
-<li>we can reuse the lua script in the client any time.</li>
-</ul>
-</li>
-<li>Pub-Sub<ul>
-<li>support simple regex pattern match to topics</li>
-<li>If subscribers are not online, the message will lost</li>
-</ul>
-</li>
-</ol>
-<h2 id="Use-cases"><a href="#Use-cases" class="headerlink" title="Use cases"></a>Use cases</h2><ol>
-<li>find top K hot XXXX in a website</li>
-<li>find recent visited records</li>
-<li>sanity check of a request (i.e., if the user id is marched with some fields)</li>
-<li>statistic: i.e., count how many users are registered, how many visited, etc.</li>
-</ol>
+        <p>好久没写日记了，今天想起来写是因为一件让我很痛心的事，我的一个表弟因为癌症去世了。小时候经常一起玩，特别喜欢跟他开玩笑，一个非常善良呆萌的小男孩，但是自从我出来工作之后，我已经有很长一段时间没有见过他了，去年他得了癌症，医生告知他只有一年的时间，我得知后，心里一直堵着，他一直在坚持着，但是最后这一天还是到来了。<br>上一次我遇到这种事情还是小时候爷爷去世，那时候不懂，印象也不深了。但是这次我的心却久久不能平静。他比我小十岁左右，还正青春，我的脑海中还有很多跟他玩耍的记忆。感觉这次的别离是如此的近，我不愿相信这是真的，心里极其的难受。而且我还远在千里之外，不能在老家好好地送送他，也没法陪陪他的家里人，我不知道他们现在是什么样子，也不敢去想。很多事情我都不敢想，我怕自己一想就会无法控制自己的情绪。<br>我伤心，悔恨，又害怕。我伤心的是他患病期间经历的痛苦，伤心的是那段记忆将成为永恒，伤心的是他还没有好好地享受这个世界，伤心的是我没有跟他好好地道别。我悔恨的是，自己的无能，我自从上班以来，老家的亲人们根本无暇顾及，每日的工作充满了我的生活，即使是有剩余的时间，我也需要用来构建我自己的家庭，也需要让自己放松，充电，留给亲人的那部分非常的少，在遇到这种事情的时候，我除了从经济上给予帮助之外，很难顾及周全。我害怕的是，我到底错过了什么，还会错过什么。<br>尽管我知道，即使我对这一切都做足了准备，我还是会很无力地面对他们，还是会伤心，但我觉得比起现在，当我听到他去世消息的时候，才意识到他是我心中很关心的人，但自己对他的记忆已经开始模糊，这种感觉简直会让人难受至极。甚至让我对自己现在做的所有事情都感到恶心和羞愧，因为我觉得我手头的所有事情，都没有一个二十岁的生命来得重要。<br>是时候该好好反思自己对家人的付出，事业是可以拼搏，但亲情却是用金钱换不来，我才明白这句话的意思。<br>珍惜身边的人和事，时间花得再多也值得。<br>逝者已矣，愿我的表弟在天堂一切安好。<br><img src="/images/cherish.jpeg" alt=""></p>
 
       
     </div>
@@ -381,11 +330,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
-          
-            <a href="/tags/Open-Source/" rel="tag"># Open Source</a>
-          
-            <a href="/tags/Redis/" rel="tag"># Redis</a>
+            <a href="/tags/生活/" rel="tag"># 生活</a>
           
         </div>
       
@@ -398,8 +343,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/20/ElasticSearch/" rel="next" title="ElasticSearch Inside(1)">
-                <i class="fa fa-chevron-left"></i> ElasticSearch Inside(1)
+              <a href="/2017/12/28/NewZealand/" rel="next" title="新西兰--一个被上帝眷顾的地方">
+                <i class="fa fa-chevron-left"></i> 新西兰--一个被上帝眷顾的地方
               </a>
             
           </div>
@@ -407,10 +352,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/01/books/" rel="prev" title="想读的书单">
-                想读的书单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -462,17 +403,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -523,22 +455,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Single-Machine-Redis"><span class="nav-number">2.</span> <span class="nav-text">Single Machine Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-Redis"><span class="nav-number">3.</span> <span class="nav-text">Distributed Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other-features"><span class="nav-number">4.</span> <span class="nav-text">Other features</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-cases"><span class="nav-number">5.</span> <span class="nav-text">Use cases</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
